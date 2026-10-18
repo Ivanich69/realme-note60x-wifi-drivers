@@ -1,0 +1,279 @@
+--- a/drivers/rtl8812au/hal/rtl8812a/usb/rtl8812au_xmit.c
++++ b/drivers/rtl8812au/hal/rtl8812a/usb/rtl8812au_xmit.c
+@@ -18,6 +18,14 @@
+ #include <rtl8812a_hal.h>
+ 
+ 
++#ifdef PLATFORM_LINUX
++/* Match tasklet_init's actual unsigned-long callback type under Clang CFI. */
++static void rtl8812au_xmit_tasklet_cfi(unsigned long data)
++{
++	rtl8812au_xmit_tasklet((void *)data);
++}
++#endif
++
+ s32	rtl8812au_init_xmit_priv(_adapter *padapter)
+ {
+ 	struct xmit_priv	*pxmitpriv = &padapter->xmitpriv;
+@@ -25,7 +33,7 @@
+ 
+ #ifdef PLATFORM_LINUX
+ 	tasklet_init(&pxmitpriv->xmit_tasklet,
+-		     (void(*)(unsigned long))rtl8812au_xmit_tasklet,
++		     rtl8812au_xmit_tasklet_cfi,
+ 		     (unsigned long)padapter);
+ #endif
+ #ifdef CONFIG_TX_EARLY_MODE
+--- a/drivers/rtl8812au/hal/rtl8814a/usb/rtl8814au_xmit.c
++++ b/drivers/rtl8812au/hal/rtl8814a/usb/rtl8814au_xmit.c
+@@ -18,6 +18,14 @@
+ #include <rtl8814a_hal.h>
+ 
+ 
++#ifdef PLATFORM_LINUX
++/* Match tasklet_init's actual unsigned-long callback type under Clang CFI. */
++static void rtl8814au_xmit_tasklet_cfi(unsigned long data)
++{
++	rtl8814au_xmit_tasklet((void *)data);
++}
++#endif
++
+ s32	rtl8814au_init_xmit_priv(_adapter *padapter)
+ {
+ 	struct xmit_priv	*pxmitpriv = &padapter->xmitpriv;
+@@ -25,7 +33,7 @@
+ 
+ #ifdef PLATFORM_LINUX
+ 	tasklet_init(&pxmitpriv->xmit_tasklet,
+-	     (void(*)(unsigned long))rtl8814au_xmit_tasklet,
++	     rtl8814au_xmit_tasklet_cfi,
+ 	     (unsigned long)padapter);
+ #endif
+ #ifdef CONFIG_TX_EARLY_MODE
+--- a/drivers/rtl8188eus/hal/rtl8188e/usb/rtl8188eu_xmit.c
++++ b/drivers/rtl8188eus/hal/rtl8188e/usb/rtl8188eu_xmit.c
+@@ -18,6 +18,14 @@
+ #include <rtl8188e_hal.h>
+ 
+ 
++#ifdef PLATFORM_LINUX
++/* Match tasklet_init's actual unsigned-long callback type under Clang CFI. */
++static void rtl8188eu_xmit_tasklet_cfi(unsigned long data)
++{
++	rtl8188eu_xmit_tasklet((void *)data);
++}
++#endif
++
+ s32	rtl8188eu_init_xmit_priv(_adapter *padapter)
+ {
+ 	struct xmit_priv	*pxmitpriv = &padapter->xmitpriv;
+@@ -25,7 +33,7 @@
+ 
+ #ifdef PLATFORM_LINUX
+ 	tasklet_init(&pxmitpriv->xmit_tasklet,
+-		     (void(*)(unsigned long))rtl8188eu_xmit_tasklet,
++		     rtl8188eu_xmit_tasklet_cfi,
+ 		     (unsigned long)padapter);
+ #endif
+ #ifdef CONFIG_TX_EARLY_MODE
+--- a/drivers/rtl8812bu/hal/rtl8822b/usb/rtl8822bu_xmit.c
++++ b/drivers/rtl8812bu/hal/rtl8822b/usb/rtl8822bu_xmit.c
+@@ -871,6 +871,14 @@
+ 
+ }
+ 
++#ifdef PLATFORM_LINUX
++/* Match tasklet_init's actual unsigned-long callback type under Clang CFI. */
++static void rtl8822bu_xmit_tasklet_cfi(unsigned long data)
++{
++	rtl8822bu_xmit_tasklet((void *)data);
++}
++#endif
++
+ s32	rtl8822bu_init_xmit_priv(PADAPTER padapter)
+ {
+ 	struct xmit_priv *pxmitpriv = &padapter->xmitpriv;
+@@ -879,9 +887,9 @@
+ #ifdef PLATFORM_LINUX
+ 	tasklet_init(&pxmitpriv->xmit_tasklet,
+ #if (LINUX_VERSION_CODE < KERNEL_VERSION(5, 17, 0) && !defined(RHEL92))
+-		     (void(*)(unsigned long))rtl8822bu_xmit_tasklet,
++		     rtl8822bu_xmit_tasklet_cfi,
+ #else
+-		     (void *)rtl8822bu_xmit_tasklet,
++		     rtl8822bu_xmit_tasklet_cfi,
+ #endif
+ 		     (unsigned long)padapter);
+ #endif
+--- a/drivers/rtl8812bu/os_dep/linux/ioctl_cfg80211.c
++++ b/drivers/rtl8812bu/os_dep/linux/ioctl_cfg80211.c
+@@ -4660,6 +4660,11 @@
+ }
+ #endif	/*	CONFIG_RTW_DEBUG	*/
+ 
++static void rtw_hal_update_txpwr_level_cfi(void *context)
++{
++	rtw_hal_update_txpwr_level((_adapter *)context);
++}
++
+ static int cfg80211_rtw_set_txpower(struct wiphy *wiphy,
+ #if (LINUX_VERSION_CODE >= KERNEL_VERSION(3, 8, 0))
+ 	struct wireless_dev *wdev,
+@@ -4719,7 +4724,7 @@
+ 	}
+ 
+ 	if (ret == 0)
+-		rtw_run_in_thread_cmd_wait(adapter, ((void *)(rtw_hal_update_txpwr_level)), adapter, 2000);
++		rtw_run_in_thread_cmd_wait(adapter, rtw_hal_update_txpwr_level_cfi, adapter, 2000);
+ 
+ exit:
+ 	return ret;
+--- a/drivers/rtl8188eus/hal/hal_hci/hal_usb.c
++++ b/drivers/rtl8188eus/hal/hal_hci/hal_usb.c
+@@ -17,6 +17,13 @@
+ #include <drv_types.h>
+ #include <hal_data.h>
+ 
++#ifdef PLATFORM_LINUX
++static void usb_recv_tasklet_cfi(unsigned long data)
++{
++	usb_recv_tasklet((void *)data);
++}
++#endif
++
+ int	usb_init_recv_priv(_adapter *padapter, u16 ini_in_buf_sz)
+ {
+ 	struct recv_priv	*precvpriv = &padapter->recvpriv;
+@@ -25,7 +32,7 @@
+ 
+ #ifdef PLATFORM_LINUX
+ 	tasklet_init(&precvpriv->recv_tasklet,
+-		     (void(*)(unsigned long))usb_recv_tasklet,
++		     usb_recv_tasklet_cfi,
+ 		     (unsigned long)padapter);
+ #endif /* PLATFORM_LINUX */
+ 
+--- a/drivers/rtl8812bu/hal/hal_hci/hal_usb.c
++++ b/drivers/rtl8812bu/hal/hal_hci/hal_usb.c
+@@ -17,6 +17,13 @@
+ #include <drv_types.h>
+ #include <hal_data.h>
+ 
++#ifdef PLATFORM_LINUX
++static void usb_recv_tasklet_cfi(unsigned long data)
++{
++	usb_recv_tasklet((void *)data);
++}
++#endif
++
+ int	usb_init_recv_priv(_adapter *padapter, u16 ini_in_buf_sz)
+ {
+ 	struct registry_priv *regsty = adapter_to_regsty(padapter);
+@@ -27,9 +34,9 @@
+ #ifdef PLATFORM_LINUX
+ 	tasklet_init(&precvpriv->recv_tasklet,
+ #if (LINUX_VERSION_CODE < KERNEL_VERSION(5, 17, 0) && !defined(RHEL92))
+-		     (void(*)(unsigned long))usb_recv_tasklet,
++		     usb_recv_tasklet_cfi,
+ #else
+-		     (void *)usb_recv_tasklet,
++		     usb_recv_tasklet_cfi,
+ #endif
+ 		     (unsigned long)padapter);
+ #endif /* PLATFORM_LINUX */
+--- a/drivers/rtl8812au/os_dep/linux/rtw_proc.c
++++ b/drivers/rtl8812au/os_dep/linux/rtw_proc.c
+@@ -2172,6 +2172,17 @@
+ 	return 0;
+ }
+ 
++/* Queue callbacks take void *, while PHY helpers take _adapter *. */
++static void phy_reload_default_tx_power_ext_info_cfi(void *context)
++{
++	phy_reload_default_tx_power_ext_info((_adapter *)context);
++}
++
++static void phy_reload_tx_power_ext_info_cfi(void *context)
++{
++	phy_reload_tx_power_ext_info((_adapter *)context);
++}
++
+ static ssize_t proc_set_tx_power_ext_info(struct file *file, const char __user *buffer, size_t count, loff_t *pos, void *data)
+ {
+ 	struct net_device *dev = data;
+@@ -2201,9 +2212,9 @@
+ 			goto clear_ps_deny;
+ 
+ 		if (strcmp("default", cmd) == 0)
+-			rtw_run_in_thread_cmd(adapter, ((void *)(phy_reload_default_tx_power_ext_info)), adapter);
++			rtw_run_in_thread_cmd(adapter, phy_reload_default_tx_power_ext_info_cfi, adapter);
+ 		else
+-			rtw_run_in_thread_cmd(adapter, ((void *)(phy_reload_tx_power_ext_info)), adapter);
++			rtw_run_in_thread_cmd(adapter, phy_reload_tx_power_ext_info_cfi, adapter);
+ 
+ clear_ps_deny:
+ 		rtw_ps_deny_cancel(adapter, PS_DENY_IOCTL);
+--- a/drivers/rtl8188eus/os_dep/linux/rtw_proc.c
++++ b/drivers/rtl8188eus/os_dep/linux/rtw_proc.c
+@@ -2060,6 +2060,17 @@
+ 	return 0;
+ }
+ 
++/* Queue callbacks take void *, while PHY helpers take _adapter *. */
++static void phy_reload_default_tx_power_ext_info_cfi(void *context)
++{
++	phy_reload_default_tx_power_ext_info((_adapter *)context);
++}
++
++static void phy_reload_tx_power_ext_info_cfi(void *context)
++{
++	phy_reload_tx_power_ext_info((_adapter *)context);
++}
++
+ static ssize_t proc_set_tx_power_ext_info(struct file *file, const char __user *buffer, size_t count, loff_t *pos, void *data)
+ {
+ 	struct net_device *dev = data;
+@@ -2089,9 +2100,9 @@
+ 			goto clear_ps_deny;
+ 
+ 		if (strcmp("default", cmd) == 0)
+-			rtw_run_in_thread_cmd(adapter, ((void *)(phy_reload_default_tx_power_ext_info)), adapter);
++			rtw_run_in_thread_cmd(adapter, phy_reload_default_tx_power_ext_info_cfi, adapter);
+ 		else
+-			rtw_run_in_thread_cmd(adapter, ((void *)(phy_reload_tx_power_ext_info)), adapter);
++			rtw_run_in_thread_cmd(adapter, phy_reload_tx_power_ext_info_cfi, adapter);
+ 
+ clear_ps_deny:
+ 		rtw_ps_deny_cancel(adapter, PS_DENY_IOCTL);
+--- a/drivers/rtl8812bu/os_dep/linux/rtw_proc.c
++++ b/drivers/rtl8812bu/os_dep/linux/rtw_proc.c
+@@ -2877,6 +2877,17 @@
+ 	return 0;
+ }
+ 
++/* Queue callbacks take void *, while PHY helpers take _adapter *. */
++static void phy_reload_default_tx_power_ext_info_cfi(void *context)
++{
++	phy_reload_default_tx_power_ext_info((_adapter *)context);
++}
++
++static void phy_reload_tx_power_ext_info_cfi(void *context)
++{
++	phy_reload_tx_power_ext_info((_adapter *)context);
++}
++
+ static ssize_t proc_set_tx_power_ext_info(struct file *file, const char __user *buffer, size_t count, loff_t *pos, void *data)
+ {
+ 	struct net_device *dev = data;
+@@ -2906,9 +2917,9 @@
+ 			goto clear_ps_deny;
+ 
+ 		if (strcmp("default", cmd) == 0)
+-			rtw_run_in_thread_cmd(adapter, ((void *)(phy_reload_default_tx_power_ext_info)), adapter);
++			rtw_run_in_thread_cmd(adapter, phy_reload_default_tx_power_ext_info_cfi, adapter);
+ 		else
+-			rtw_run_in_thread_cmd(adapter, ((void *)(phy_reload_tx_power_ext_info)), adapter);
++			rtw_run_in_thread_cmd(adapter, phy_reload_tx_power_ext_info_cfi, adapter);
+ 
+ 		rtw_run_in_thread_cmd_wait(adapter, ((void *)(rtw_hal_update_txpwr_level)), adapter, 2000);
+ 

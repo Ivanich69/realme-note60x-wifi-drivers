@@ -1,0 +1,18 @@
+{
+  "host_only": true,
+  "executes_generated_scripts": false,
+  "phone_contacted": false,
+  "files": {
+    "build/realme-note60x/wifi4-audit/audit_callbacks.py": "d51717669056e4397d33014096ed291e88623eab7642ee8fa6dca58df4dd72f4",
+    "build/realme-note60x/wifi4-runtime-audit/audit_runtime.py": "4aba84a5582b5d148fe4a537a777fd9b68d345134aa93e525c9edc017da2bf9a",
+    "build/realme-note60x/wifi4-runtime-audit/clang_roots.py": "d0a4f08d5d8148433b7cd1b7c22ea1ab9e8f389ec7ab88035d2c7c8cad438d2c",
+    "build/realme-note60x/wifi4/export_artifacts.py": "606435e7da991b39786eaf23983b154360679d1cd97f07e01948e7a59b7e5cc2"
+  },
+  "kind": "Initial generation receipt; outputs subsequently reviewed and edited",
+  "reviewed_final_files": {
+    "build/realme-note60x/wifi4-audit/audit_callbacks.py": "d51717669056e4397d33014096ed291e88623eab7642ee8fa6dca58df4dd72f4",
+    "build/realme-note60x/wifi4-runtime-audit/audit_runtime.py": "5dc30e6c584a8746032dffe6bec073aeb9896a71ba9c61b37c3cc8d73427c2e3",
+    "build/realme-note60x/wifi4-runtime-audit/clang_roots.py": "d0a4f08d5d8148433b7cd1b7c22ea1ab9e8f389ec7ab88035d2c7c8cad438d2c",
+    "build/realme-note60x/wifi4/export_artifacts.py": "e03bc19ec2ffc20aac825de5b7ca44fb567e757ec34d5609b2bb24d813f1e27b"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "repository": "https://kernel.googlesource.com/pub/scm/linux/kernel/git/firmware/linux-firmware",
+  "commit": "24247053afda2bab6b4ace42402dbf9f3b1305d6",
+  "files": [
+    {
+      "file": "ath9k_htc/htc_9271-1.4.0.fw",
+      "size": 51008,
+      "sha256": "78f7d592a95b419a02fde7440f30c606fc31a871cf0ce150ced40d4857173eb0",
+      "url": "https://kernel.googlesource.com/pub/scm/linux/kernel/git/firmware/linux-firmware/+/24247053afda2bab6b4ace42402dbf9f3b1305d6/ath9k_htc/htc_9271-1.4.0.fw?format=TEXT"
+    },
+    {
+      "file": "LICENSES/LICENCE.open-ath9k-htc-firmware",
+      "size": 9409,
+      "sha256": "83870e84c54aa76be973a78387b342c80ef0908b8cb82edde6d54c511b18c16c",
+      "url": "https://kernel.googlesource.com/pub/scm/linux/kernel/git/firmware/linux-firmware/+/24247053afda2bab6b4ace42402dbf9f3b1305d6/LICENSES/LICENCE.open-ath9k-htc-firmware?format=TEXT"
+    }
+  ]
+}

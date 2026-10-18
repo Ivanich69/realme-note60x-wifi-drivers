@@ -1,0 +1,44 @@
+{
+  "passed": true,
+  "scope": "Actual pre-link objects for three ndo_start_xmit callbacks; no runtime test",
+  "expected_type": "_ZTSF9netdev_txP7sk_buffP10net_deviceE",
+  "expected_cross_DSO_type_id": "-335701820511754862",
+  "objects": [
+    {
+      "driver": "rtl8812au",
+      "source_sha256": "34719d3043d02b7d4ba876545ed92d0f27ebb72a68172e34082bcdb03b2a4343",
+      "compiled_object_sha256": "bcf2021e4449956e1c09e0918fe0fa95c7617e6d6ad6e79bb1b59c82a97118cb",
+      "CFI_types": [
+        "_ZTSF9netdev_txP7sk_buffP10net_deviceE",
+        "_ZTSF9netdev_txPvS0_E.generalized"
+      ],
+      "cross_DSO_type_ids": [
+        "-335701820511754862"
+      ]
+    },
+    {
+      "driver": "rtl8188eus",
+      "source_sha256": "b3b56bf6d6f41119a537e6a6b981ce673cc537a000fbad786ecb6a711bd750e3",
+      "compiled_object_sha256": "779f3ee4a416782ae47d1a05285e404521360080089483f9091224b812200ba1",
+      "CFI_types": [
+        "_ZTSF9netdev_txP7sk_buffP10net_deviceE",
+        "_ZTSF9netdev_txPvS0_E.generalized"
+      ],
+      "cross_DSO_type_ids": [
+        "-335701820511754862"
+      ]
+    },
+    {
+      "driver": "rtl8812bu",
+      "source_sha256": "5c4e88e15b1f9a06e17e610a0ed556e9b573d56a26e6a3cf641e92f3d9dc84ed",
+      "compiled_object_sha256": "d822fe8b48dae008642de26a59d210b58d8765fdababd64473d945740d720247",
+      "CFI_types": [
+        "_ZTSF9netdev_txP7sk_buffP10net_deviceE",
+        "_ZTSF9netdev_txPvS0_E.generalized"
+      ],
+      "cross_DSO_type_ids": [
+        "-335701820511754862"
+      ]
+    }
+  ]
+}

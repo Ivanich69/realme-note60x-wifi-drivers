@@ -1,0 +1,63 @@
+{
+  "variant": "wifi4-cfi-runtime",
+  "scope": "Host-only typed callback wrappers; wifi3 core retained",
+  "source_bundle": "artifacts/realme-note60x/gki-wifi3-cfi-monitor/sources/driver-sources-and-config.tar.gz",
+  "source_bundle_sha256": "c4eddc844f1cc5ec432713657eb5f2e0c01397d0552cae207d76e5b3009a6acf",
+  "base_Image_sha256": "c7a1a7e7a6d9784d00e7d8f0c18f5ee072b5f006e8696162d2405ac515d305db",
+  "config_sha256": "513cad42f78dee45b7892917cc7c080971734d990b866243fabeece1c22bcb8b",
+  "source_changes": [
+    {
+      "file": "drivers/rtl8812au/hal/rtl8812a/usb/rtl8812au_xmit.c",
+      "before_sha256": "3617fcc5781676ea18067a571cbd6d86be9f4247c2b2acaaf415cdbc342f9916",
+      "after_sha256": "00ba5f6e23d37d68bfc12dea86f55fe582087ffa778b874928a85fdcd08aed7e"
+    },
+    {
+      "file": "drivers/rtl8812au/hal/rtl8814a/usb/rtl8814au_xmit.c",
+      "before_sha256": "abeebe5514708465e097462999f460908e57ccece1d9428737502f3c5f4a5f28",
+      "after_sha256": "00d3ebe23e1094e09b02c15216dfdf086f480f82d069041380b33cdb563ba150"
+    },
+    {
+      "file": "drivers/rtl8188eus/hal/rtl8188e/usb/rtl8188eu_xmit.c",
+      "before_sha256": "07815727bbfc9227a3f375936765aba0811b9a4f4c136517ef784c94c6f7cd6e",
+      "after_sha256": "d95da0c9bf1dc25e27a21c0fc2281b3dd03630c474699fec2b77d24f02b9c4d3"
+    },
+    {
+      "file": "drivers/rtl8812bu/hal/rtl8822b/usb/rtl8822bu_xmit.c",
+      "before_sha256": "01d4ac327a7e187f9369a1e1db2a083715e604a7036f1e6f2df63e8fa1f1989b",
+      "after_sha256": "495e6882239714aed20875d4dbfb8072f41e65a50ef9211320f16dbdb508272e"
+    },
+    {
+      "file": "drivers/rtl8812bu/os_dep/linux/ioctl_cfg80211.c",
+      "before_sha256": "c8d524a6681a8678c64793aaee82e2d01a6c759dcbb224d349ad5d0c28c57784",
+      "after_sha256": "8f405dc4eb9c032c6816607f5ee0638211d3e35dbf23348037f30cde0fec9581"
+    },
+    {
+      "file": "drivers/rtl8188eus/hal/hal_hci/hal_usb.c",
+      "before_sha256": "238bc56386917452595dc35206c0e35fc089dc5c649375adb0161fbb53e47cdc",
+      "after_sha256": "fbc2d6b0c526a1d2d99a2c9b3ed00991c0c76b5e399c6059f11ce4d41823248b"
+    },
+    {
+      "file": "drivers/rtl8812bu/hal/hal_hci/hal_usb.c",
+      "before_sha256": "15c7e2d0726257a49413f25c8f73a55d28e2f0a8268dd9f836b3032c9f70b36c",
+      "after_sha256": "4a99cc07c5a9305be5a5e87306b81e2919c88e04d4964ac731618f8cf46c55cc"
+    },
+    {
+      "file": "drivers/rtl8812au/os_dep/linux/rtw_proc.c",
+      "before_sha256": "27830bdc71637baf1e1ca8a4715593496d8917e48fd855645ed7da2c5394c2de",
+      "after_sha256": "330015a51ce220e924264602fec911e0dac3dad47308a7807f6fcdba73c77aea"
+    },
+    {
+      "file": "drivers/rtl8188eus/os_dep/linux/rtw_proc.c",
+      "before_sha256": "f8a38991aef80b0502448fcab5b8a35a28babe3451a0f3ed243706d61557605a",
+      "after_sha256": "782af789dc7016602d7eca2aad54353b8dbcb0d43de72531c6630daedd715556"
+    },
+    {
+      "file": "drivers/rtl8812bu/os_dep/linux/rtw_proc.c",
+      "before_sha256": "94a2bbee95c334fdfe5c5534618de6d5f9a2288015f697ae54aa6b4b28936b44",
+      "after_sha256": "2e312d400839f6248aca411c8474b36ab24b407a0a8927a4969584e7f611f479"
+    }
+  ],
+  "patch_sha256": "c5819d845bbbcc07f2074b54665e687a8a2c322b35d1afa1ade50e88ba2ed277",
+  "baseline_runtime_audit_sha256": "5058543411997ed4b992797e63175819b389b11b8cba7410de7f777e4307b514",
+  "device_operations": []
+}

@@ -1,0 +1,33 @@
+{
+  "passed": true,
+  "scope": "Three Linux ndo_start_xmit declarations; not all callbacks or runtime CFI",
+  "expected_type": "_ZTSF9netdev_txP7sk_buffP10net_deviceE",
+  "legacy_type": "_ZTSFiP7sk_buffP10net_deviceE",
+  "expected_cross_DSO_type_id": "-335701820511754862",
+  "legacy_cross_DSO_type_id": "-8525416796683965363",
+  "legacy_type_rejected": true,
+  "callbacks": [
+    {
+      "driver": "rtl8812au",
+      "signature": "netdev_tx_t rtw_xmit_entry(struct sk_buff *pkt, struct net_device *pnetdev)",
+      "source_sha256": "34719d3043d02b7d4ba876545ed92d0f27ebb72a68172e34082bcdb03b2a4343",
+      "cfi_type": "_ZTSF9netdev_txP7sk_buffP10net_deviceE",
+      "cross_DSO_type_id": "-335701820511754862"
+    },
+    {
+      "driver": "rtl8188eus",
+      "signature": "netdev_tx_t rtw_xmit_entry(_pkt *pkt, _nic_hdl pnetdev)",
+      "source_sha256": "b3b56bf6d6f41119a537e6a6b981ce673cc537a000fbad786ecb6a711bd750e3",
+      "cfi_type": "_ZTSF9netdev_txP7sk_buffP10net_deviceE",
+      "cross_DSO_type_id": "-335701820511754862"
+    },
+    {
+      "driver": "rtl8812bu",
+      "signature": "netdev_tx_t rtw_xmit_entry(_pkt *pkt, _nic_hdl pnetdev)",
+      "source_sha256": "5c4e88e15b1f9a06e17e610a0ed556e9b573d56a26e6a3cf641e92f3d9dc84ed",
+      "cfi_type": "_ZTSF9netdev_txP7sk_buffP10net_deviceE",
+      "cross_DSO_type_id": "-335701820511754862"
+    }
+  ],
+  "kernel_header_sha256": "adcb0146253ad0a28328c53a99b268d621cef88e9ed144658275936aec518477"
+}

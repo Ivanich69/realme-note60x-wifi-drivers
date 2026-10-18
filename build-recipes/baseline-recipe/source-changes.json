@@ -1,0 +1,107 @@
+[
+  {
+    "file": "drivers/rtl8812au/Makefile",
+    "before_sha256": "a47b02cc9890062591a8157ed3f55292009c71cac6f4a7c75a73c1fc20eb058f",
+    "after_sha256": "2b20edff598af23921d3fc87adf41ba176f1430ece293969bd231061809c9f49"
+  },
+  {
+    "file": "drivers/rtl8188eus/Makefile",
+    "before_sha256": "fc29b07ed85fb7680d4698f40aaf1965a8d5b63f499058a562a917107093f722",
+    "after_sha256": "cf06e250abf901dabcc5b15dafdd4441bd4ebfa0f59f1d8183e89fb179e0c9ac"
+  },
+  {
+    "file": "drivers/rtl8188eus/os_dep/linux/rtw_cfgvendor.c",
+    "before_sha256": "bfd21ac6ff23887da5d6a8da733aef0ad0fbdaaab3531425b1b7afe1d08d4218",
+    "after_sha256": "33e6340857ac2a326ec15564a00cf86daf205e81784143ba522b882f55a3317b"
+  },
+  {
+    "file": "drivers/rtl8188eus/hal/rtl8188e/usb/usb_halinit.c",
+    "before_sha256": "0d8cfee1c90a61a3ce91282ae6db42c591f2cb9b6fb3c7ef5e6998d7bff1679b",
+    "after_sha256": "5df0b62ca3b12742fd0bfb6e39be3eec9110ff6920e6a4a1c7faf92e381d7b99"
+  },
+  {
+    "file": "drivers/rtl8812bu/Makefile",
+    "before_sha256": "6bb0c40902f5f73be4cb4cef435c20cd7105aa8efa64f89f27e054e34788e252",
+    "after_sha256": "3c16a71e620d1b6fae6b9ed73503df8db9c12e89ed11898350df3fcd04a9cfad"
+  },
+  {
+    "file": "drivers/rtl8812bu/core/rtw_xmit.c",
+    "before_sha256": "74fc85b862628675edf25c76c21ee2fb97df2d864f724d20db7017f42772f680",
+    "after_sha256": "6aec6e455e06817a455f71a20ecbd21ef935f845addf26834506693b2bfce4c9"
+  },
+  {
+    "file": "drivers/rtl8812au/include/rtw_recv.h",
+    "before_sha256": "8241f598d76360b21078d5d7054e605ab4dec72965c9e063f37ee5d1028667a1",
+    "after_sha256": "41f7c368320fd72e9405610aad56c625d667977e5056690cf6650d321af10ccb"
+  },
+  {
+    "file": "drivers/rtl8812au/core/rtw_debug.c",
+    "before_sha256": "f47b673adbb2a864941d2c46b58ce490cda711d84826259d0494ea284bf76328",
+    "after_sha256": "26e314abda71378b0094eac9d46cbc95a067f179d99b48ab081d4c1db1d05aa9"
+  },
+  {
+    "file": "drivers/rtl8812au/core/rtw_mlme_ext.c",
+    "before_sha256": "552e4208a72d9acea8e9330d56b17b64b2e3c201a4582917ca681cef5bcd2372",
+    "after_sha256": "a4e33f027e91a8e028cc6dfdcf8a48a711f44c94f778f3cb77d41e4bb90d8c8a"
+  },
+  {
+    "file": "drivers/rtl8812au/os_dep/linux/ioctl_cfg80211.c",
+    "before_sha256": "9a2da2829af0b4755c4184f0763cf4debd39e2460478e661ef2c632a1cff0fff",
+    "after_sha256": "89788c369d9e59c7dd66b0e3a13939a6df30a38e2f9f2286f0ae174df88bc6e2"
+  },
+  {
+    "file": "drivers/rtl8188eus/os_dep/linux/ioctl_cfg80211.c",
+    "before_sha256": "f53c62c10fc1f66ecc95f2ab1a4bdb325256bb6c09034539d23a61140deba8bb",
+    "after_sha256": "1f1a60be2e94df4b7835204d64071660015ce6e15472e9e5ee11696de48b0726"
+  },
+  {
+    "file": "drivers/rtl8812bu/os_dep/linux/ioctl_cfg80211.c",
+    "before_sha256": "0d57d391a8eea38541fde738fe3538dddd0fd016ba476be3d47edc321af0e46f",
+    "after_sha256": "dd79d25ea225e434dbeab65d3ba65fd49b1b2611ffe384961c173d0b2230c7bd"
+  },
+  {
+    "file": "drivers/rtl8812au/hal/rtl8814a/rtl8814a_hal_init.c",
+    "before_sha256": "0b3c517bde7d2b131bd16a20589dcb226a986c15c0f3580432ee3754b4cb78b1",
+    "after_sha256": "c33f903c2fb9a9f9fbf85a0a216189f54d55ce9486681addca27ee2c02f45d30"
+  },
+  {
+    "file": "drivers/rtl8812au/hal/phydm/phydm_api.c",
+    "before_sha256": "c46e38f65efbeb5665d8ae1a04a37c9d413fe233f7886d8b3dbc935090ffdc7c",
+    "after_sha256": "a44430eb47834261dc70ea40b07f21e3c4a01a0b5fe668ab2027146422ea55b2"
+  },
+  {
+    "file": "drivers/rtl8812bu/hal/phydm/phydm_api.c",
+    "before_sha256": "65af367a88dc6f8566d5a49628216d604c8cd7da3f6818c9a4025897d209c96b",
+    "after_sha256": "a31554f8df1ebe44f1be74c84e2759f3707826ed7fc1ef3d82de8aab6a55a0f1"
+  },
+  {
+    "file": "drivers/rtl8188eus/os_dep/linux/usb_intf.c",
+    "before_sha256": "860953543b535094302b74689e8fdfe9746e34214208470638c7fcdf97ee82cd",
+    "after_sha256": "26da8f8bb7cea8d4a70d7007c8c5a1474fd8849dcdffc615d701bd74f5f2fead"
+  },
+  {
+    "file": "drivers/rtl8188eus/hal/phydm/phydm_debug.c",
+    "before_sha256": "523b704f58e25f25c7ad8e13f6b5621fdbd24e6959648d0e6b8123cc327681d4",
+    "after_sha256": "fb7b14ddaa68fb50d51518916b02b2f198c2cb0c942cff1f1f6a5dcda5ab6528"
+  },
+  {
+    "file": "drivers/rtl8188eus/hal/phydm/phydm_api.c",
+    "before_sha256": "2fd7f68d983c14a98390b1427a92e1c4e4213a6ad58b3c86d57e7b738b3e8a53",
+    "after_sha256": "f29020c795c2b2a9cbe4cb9b445b0f1f3655703b973abb543dac475fb846f1d8"
+  },
+  {
+    "file": "drivers/rtl8812bu/core/rtw_mlme_ext.c",
+    "before_sha256": "ec0ed9bea3ad0975e05346d55c455d5bb2ec01afc78845670e4086120c2e330d",
+    "after_sha256": "66948a7ea125648e849c604173b32831211f280102ccf5e26daa867eeb9e684e"
+  },
+  {
+    "file": "drivers/rtl8812bu/hal/hal_dm.c",
+    "before_sha256": "ffe79e933ad544b6908fb9c98765cffb28fb76501b458495edc2023384ac75f2",
+    "after_sha256": "3ffe1508e6992b6e0a7167ef9a629e48ceb21367efccd9c57f6c607057e61313"
+  },
+  {
+    "file": "drivers/rtl8812bu/hal/hal_halmac.c",
+    "before_sha256": "5edebdca3cbd4c72c05950e016196610015b53157671a1b930cc02878949865f",
+    "after_sha256": "d64d4525886dd9347ee3c9b8066954b2a8f8513042b38ac1682e4d59def0fba9"
+  }
+]

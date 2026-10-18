@@ -1,0 +1,1362 @@
+--- a/drivers/rtl8812au/Makefile
++++ b/drivers/rtl8812au/Makefile
+@@ -1,23 +1,27 @@
++# Realme GKI ARM64 external-module build
++ccflags-y += -DCONFIG_LITTLE_ENDIAN -DCONFIG_IOCTL_CFG80211
++ccflags-y += -DRTW_USE_CFG80211_STA_EVENT
++
+ EXTRA_CFLAGS += $(USER_EXTRA_CFLAGS) -fno-pie
+ EXTRA_CFLAGS += -O3
+-EXTRA_CFLAGS += -Wno-unused-variable
++EXTRA_CFLAGS += $(call cc-disable-warning,unused-variable)
+ #EXTRA_CFLAGS += -Wno-unused-value
+-EXTRA_CFLAGS += -Wno-unused-label
++EXTRA_CFLAGS += $(call cc-disable-warning,unused-label)
+ #EXTRA_CFLAGS += -Wno-unused-parameter
+-EXTRA_CFLAGS += -Wno-unused-function
+-EXTRA_CFLAGS += -Wno-implicit-fallthrough
+-EXTRA_CFLAGS += -Wno-cast-function-type
+-EXTRA_CFLAGS += -Wno-missing-declarations
+-EXTRA_CFLAGS += -Wno-missing-prototypes
++EXTRA_CFLAGS += $(call cc-disable-warning,unused-function)
++EXTRA_CFLAGS += $(call cc-disable-warning,implicit-fallthrough)
++EXTRA_CFLAGS += $(call cc-disable-warning,cast-function-type)
++EXTRA_CFLAGS += $(call cc-disable-warning,missing-declarations)
++EXTRA_CFLAGS += $(call cc-disable-warning,missing-prototypes)
+ #EXTRA_CFLAGS += -Wno-error=cast-function-type
+ #EXTRA_CFLAGS += -Wno-parentheses-equality
+ #EXTRA_CFLAGS += -Wno-error=incompatible-pointer-types
+-EXTRA_CFLAGS += -Wno-stringop-overread
++EXTRA_CFLAGS += $(call cc-disable-warning,stringop-overread)
+ #EXTRA_CFLAGS += -Wno-pointer-bool-conversion
+-EXTRA_CFLAGS += -Wno-unknown-pragmas
++EXTRA_CFLAGS += $(call cc-disable-warning,unknown-pragmas)
+ #EXTRA_CFLAGS += -Wno-unused
+-EXTRA_CFLAGS += -Wno-address
+-EXTRA_CFLAGS += -Wno-vla -g
++EXTRA_CFLAGS += $(call cc-disable-warning,address)
++EXTRA_CFLAGS += $(call cc-disable-warning,vla) -g
+ 
+ EXTRA_CFLAGS += -I$(src)/include -I$(srctree)/$(src)/include
+ EXTRA_CFLAGS += -I$(src)/hal/phydm -I$(srctree)/$(src)/hal/phydm
+@@ -97,7 +101,7 @@
+ ###################### MP HW TX MODE FOR VHT #######################
+ CONFIG_MP_VHT_HW_TX_MODE = n
+ ###################### Platform Related #######################
+-CONFIG_PLATFORM_I386_PC = y
++CONFIG_PLATFORM_I386_PC = n
+ CONFIG_PLATFORM_ANDROID_ARM64 = n
+ CONFIG_PLATFORM_ARM_RPI = n
+ CONFIG_PLATFORM_ARM64_RPI = n
+@@ -1504,7 +1508,7 @@
+ EXTRA_CFLAGS += -DCONFIG_WAKEUP_GPIO_INPUT_MODE
+ EXTRA_CFLAGS += -DCONFIG_BT_WAKE_HST_OPEN_DRAIN
+ endif
+-EXTRA_CFLAGS += -Wno-error=date-time
++EXTRA_CFLAGS += $(call cc-disable-warning,error)=date-time
+ # default setting for Android 7.0
+ ifeq ($(RTK_ANDROID_VERSION), nougat)
+ EXTRA_CFLAGS += -DRTW_P2P_GROUP_INTERFACE=1
+@@ -1599,7 +1603,7 @@
+ endif
+ 
+ ifeq ($(CONFIG_PLATFORM_ZTE_ZX296716), y)
+-EXTRA_CFLAGS += -Wno-error=date-time
++EXTRA_CFLAGS += $(call cc-disable-warning,error)=date-time
+ EXTRA_CFLAGS += -DCONFIG_PLATFORM_ZTE_ZX296716
+ EXTRA_CFLAGS += -DCONFIG_LITTLE_ENDIAN
+ # default setting for Android
+--- a/drivers/rtl8188eus/Makefile
++++ b/drivers/rtl8188eus/Makefile
+@@ -1,25 +1,29 @@
++# Realme GKI ARM64 external-module build
++ccflags-y += -DCONFIG_LITTLE_ENDIAN -DCONFIG_IOCTL_CFG80211
++ccflags-y += -DRTW_USE_CFG80211_STA_EVENT
++
+ EXTRA_CFLAGS += $(USER_EXTRA_CFLAGS) -fno-pie
+ EXTRA_CFLAGS += -O1
+ #EXTRA_CFLAGS += -O3
+-EXTRA_CFLAGS += -Wno-unused-variable
+-EXTRA_CFLAGS += -Wno-unused-value
+-EXTRA_CFLAGS += -Wno-unused-label
+-EXTRA_CFLAGS += -Wno-unused-parameter
+-EXTRA_CFLAGS += -Wno-unused-function
+-EXTRA_CFLAGS += -Wno-unused
+-EXTRA_CFLAGS += -Wno-address
+-EXTRA_CFLAGS += -Wno-cast-function-type
++EXTRA_CFLAGS += $(call cc-disable-warning,unused-variable)
++EXTRA_CFLAGS += $(call cc-disable-warning,unused-value)
++EXTRA_CFLAGS += $(call cc-disable-warning,unused-label)
++EXTRA_CFLAGS += $(call cc-disable-warning,unused-parameter)
++EXTRA_CFLAGS += $(call cc-disable-warning,unused-function)
++EXTRA_CFLAGS += $(call cc-disable-warning,unused)
++EXTRA_CFLAGS += $(call cc-disable-warning,address)
++EXTRA_CFLAGS += $(call cc-disable-warning,cast-function-type)
+ #EXTRA_CFLAGS += -Wno-discarded-qualifiers
+-EXTRA_CFLAGS += -Wno-uninitialized
+-EXTRA_CFLAGS += -Wno-sometimes-uninitialized
+-EXTRA_CFLAGS += -Wno-enum-conversion
+-EXTRA_CFLAGS += -Wno-vla
+-EXTRA_CFLAGS += -Wno-date-time
++EXTRA_CFLAGS += $(call cc-disable-warning,uninitialized)
++EXTRA_CFLAGS += $(call cc-disable-warning,sometimes-uninitialized)
++EXTRA_CFLAGS += $(call cc-disable-warning,enum-conversion)
++EXTRA_CFLAGS += $(call cc-disable-warning,vla)
++EXTRA_CFLAGS += $(call cc-disable-warning,date-time)
+ 
+ 
+ GCC_VER_49 := $(shell echo `$(CC) -dumpversion | cut -f1-2 -d.` \>= 4.9 | bc )
+ ifeq ($(GCC_VER_49),1)
+-EXTRA_CFLAGS += -Wno-date-time	# Fix compile error && warning on gcc 4.9 and later
++EXTRA_CFLAGS += $(call cc-disable-warning,date-time)	# Fix compile error && warning on gcc 4.9 and later
+ endif
+ 
+ EXTRA_CFLAGS += -I$(src)/include -I$(srctree)/$(src)/include
+@@ -78,7 +82,7 @@
+ CONFIG_RTW_NETIF_SG = y
+ CONFIG_RTW_IPCAM_APPLICATION = n
+ CONFIG_RTW_REPEATER_SON = n
+-CONFIG_RTW_WIFI_HAL = y
++CONFIG_RTW_WIFI_HAL = n
+ ########################## Debug ###########################
+ CONFIG_RTW_DEBUG = n
+ # default log level is _DRV_INFO_ = 4,
+@@ -98,7 +102,7 @@
+ ###################### MP HW TX MODE FOR VHT #######################
+ CONFIG_MP_VHT_HW_TX_MODE = n
+ ###################### Platform Related #######################
+-CONFIG_PLATFORM_I386_PC = y
++CONFIG_PLATFORM_I386_PC = n
+ CONFIG_PLATFORM_ARM_RPI = n
+ CONFIG_PLATFORM_ARM64_RPI = n
+ CONFIG_PLATFORM_ANDROID_X86 = n
+@@ -1826,7 +1830,7 @@
+ EXTRA_CFLAGS += -DCONFIG_WAKEUP_GPIO_INPUT_MODE
+ EXTRA_CFLAGS += -DCONFIG_BT_WAKE_HST_OPEN_DRAIN
+ endif
+-EXTRA_CFLAGS += -Wno-error=date-time
++EXTRA_CFLAGS += $(call cc-disable-warning,error)=date-time
+ # default setting for Android 7.0
+ ifeq ($(RTK_ANDROID_VERSION), nougat)
+ EXTRA_CFLAGS += -DRTW_P2P_GROUP_INTERFACE=1
+@@ -1929,7 +1933,7 @@
+ endif
+ 
+ ifeq ($(CONFIG_PLATFORM_ZTE_ZX296716), y)
+-EXTRA_CFLAGS += -Wno-error=date-time
++EXTRA_CFLAGS += $(call cc-disable-warning,error)=date-time
+ EXTRA_CFLAGS += -DCONFIG_PLATFORM_ZTE_ZX296716
+ EXTRA_CFLAGS += -DCONFIG_LITTLE_ENDIAN
+ # default setting for Android
+--- a/drivers/rtl8188eus/os_dep/linux/rtw_cfgvendor.c
++++ b/drivers/rtl8188eus/os_dep/linux/rtw_cfgvendor.c
+@@ -171,7 +171,7 @@
+ int rtw_cfgvendor_send_async_event(struct wiphy *wiphy,
+ 	   struct net_device *dev, int event_id, const void  *data, int len)
+ {
+-	u16 kflags;
++	gfp_t kflags;
+ 	struct sk_buff *skb;
+ 
+ 	kflags = in_atomic() ? GFP_ATOMIC : GFP_KERNEL;
+@@ -382,7 +382,7 @@
+ int rtw_cfgvendor_send_hotlist_event(struct wiphy *wiphy,
+ 	struct net_device *dev, void  *data, int len, rtw_vendor_event_t event)
+ {
+-	u16 kflags;
++	gfp_t kflags;
+ 	const void *ptr;
+ 	struct sk_buff *skb;
+ 	int malloc_len, total, iter_cnt_to_send, cnt;
+--- a/drivers/rtl8188eus/hal/rtl8188e/usb/usb_halinit.c
++++ b/drivers/rtl8188eus/hal/rtl8188e/usb/usb_halinit.c
+@@ -284,7 +284,7 @@
+ 	/* 1; Use bulk endpoint to upload interrupt pkt,	 */
+ 	usb_opt = rtw_read8(Adapter, REG_USB_SPECIAL_OPTION);
+ 
+-	if ((IS_FULL_SPEED_USB(Adapter))
++	if (IS_FULL_SPEED_USB(Adapter)
+ #ifdef CONFIG_USB_INTERRUPT_IN_PIPE
+ 	    || (pdev->RtInPipe[REALTEK_USB_IN_INT_EP_IDX] == 0x05)
+ #endif
+--- a/drivers/rtl8812bu/Makefile
++++ b/drivers/rtl8812bu/Makefile
+@@ -1,3 +1,7 @@
++# Realme GKI ARM64 external-module build
++ccflags-y += -DCONFIG_LITTLE_ENDIAN -DCONFIG_IOCTL_CFG80211
++ccflags-y += -DRTW_USE_CFG80211_STA_EVENT
++
+ ccflags-y += $(USER_EXTRA_CFLAGS)
+ ccflags-y += -O1
+ #ccflags-y += -O3
+@@ -7,7 +11,7 @@
+ #ccflags-y += -pedantic
+ #ccflags-y += -Wshadow -Wpointer-arith -Wcast-qual -Wstrict-prototypes -Wmissing-prototypes
+ 
+-ccflags-y += -Wno-unused-variable
++ccflags-y += $(call cc-disable-warning,unused-variable)
+ #ccflags-y += -Wno-unused-value
+ #ccflags-y += -Wno-unused-label
+ #ccflags-y += -Wno-unused-parameter
+@@ -15,12 +19,12 @@
+ #ccflags-y += -Wno-unused
+ #ccflags-y += -Wno-uninitialized
+ #ccflags-y += -Wno-vla
+-ccflags-y += -Wno-misleading-indentation
+-ccflags-y += -Wno-implicit-fallthrough
++ccflags-y += $(call cc-disable-warning,misleading-indentation)
++ccflags-y += $(call cc-disable-warning,implicit-fallthrough)
+ #ccflags-y += -Wno-return-type
+ #ccflags-y += -Wno-discarded-qualifiers
+-ccflags-y += -Wno-missing-prototypes
+-ccflags-y += -Wno-missing-declarations
++ccflags-y += $(call cc-disable-warning,missing-prototypes)
++ccflags-y += $(call cc-disable-warning,missing-declarations)
+ 
+ # Activates Concurrent Mode if uncommented
+ #ccflags-y += -DCONFIG_CONCURRENT_MODE
+@@ -31,20 +35,20 @@
+ ccflags-y += -DCONFIG_LED_ENABLE
+ 
+ # gcc-12
+-ccflags-y += -Wno-address
++ccflags-y += $(call cc-disable-warning,address)
+ ccflags-y += -Wframe-larger-than=1648
+ 
+ # gcc-13
+-ccflags-y += -Wno-stringop-overread
+-ccflags-y += -Wno-enum-conversion
+-ccflags-y += -Wno-int-in-bool-context
++ccflags-y += $(call cc-disable-warning,stringop-overread)
++ccflags-y += $(call cc-disable-warning,enum-conversion)
++ccflags-y += $(call cc-disable-warning,int-in-bool-context)
+ 
+ # gcc-14
+-ccflags-y += -Wno-empty-body
++ccflags-y += $(call cc-disable-warning,empty-body)
+ 
+ GCC_VER_49 := $(shell echo `$(CC) -dumpversion | cut -f1-2 -d.` \>= 4.9 | bc )
+ ifeq ($(GCC_VER_49),1)
+-ccflags-y += -Wno-date-time	# Fix compile error && warning on gcc 4.9 and later
++ccflags-y += $(call cc-disable-warning,date-time)	# Fix compile error && warning on gcc 4.9 and later
+ endif
+ 
+ ccflags-y += -I$(src)/include
+@@ -196,7 +200,7 @@
+ #bit0: ROAM_ON_EXPIRED, #bit1: ROAM_ON_RESUME, #bit2: ROAM_ACTIVE
+ CONFIG_ROAMING_FLAG = 0x3
+ ###################### Platform Related #######################
+-CONFIG_PLATFORM_AUTODETECT = y
++CONFIG_PLATFORM_AUTODETECT = n
+ CONFIG_PLATFORM_I386_PC = n
+ CONFIG_PLATFORM_ANDROID_X86 = n
+ CONFIG_PLATFORM_ANDROID_INTEL_X86 = n
+@@ -2203,7 +2207,7 @@
+ ccflags-y += -DCONFIG_WAKEUP_GPIO_INPUT_MODE
+ ccflags-y += -DCONFIG_BT_WAKE_HST_OPEN_DRAIN
+ endif
+-ccflags-y += -Wno-error=date-time
++ccflags-y += $(call cc-disable-warning,error)=date-time
+ # default setting for Android 7.0
+ ifeq ($(RTK_ANDROID_VERSION), nougat)
+ ccflags-y += -DRTW_P2P_GROUP_INTERFACE=1
+@@ -2239,7 +2243,7 @@
+ ccflags-y += -DCONFIG_WAKEUP_GPIO_INPUT_MODE
+ ccflags-y += -DCONFIG_BT_WAKE_HST_OPEN_DRAIN
+ endif
+-ccflags-y += -Wno-error=date-time
++ccflags-y += $(call cc-disable-warning,error)=date-time
+ # default setting for Android 7.0
+ ifeq ($(RTK_ANDROID_VERSION), nougat)
+ ccflags-y += -DRTW_P2P_GROUP_INTERFACE=1
+@@ -2342,7 +2346,7 @@
+ endif
+ 
+ ifeq ($(CONFIG_PLATFORM_ZTE_ZX296716), y)
+-ccflags-y += -Wno-error=date-time
++ccflags-y += $(call cc-disable-warning,error)=date-time
+ ccflags-y += -DCONFIG_PLATFORM_ZTE_ZX296716
+ ccflags-y += -DCONFIG_LITTLE_ENDIAN
+ # default setting for Android
+--- a/drivers/rtl8812bu/core/rtw_xmit.c
++++ b/drivers/rtl8812bu/core/rtw_xmit.c
+@@ -4880,7 +4880,6 @@
+ 	struct mlme_ext_priv	*pmlmeext = &(padapter->mlmeextpriv);
+ 	struct xmit_priv	*pxmitpriv = &(padapter->xmitpriv);
+ 	unsigned char	*pframe;
+-	u8 dummybuf[32];
+ 	int len = skb->len, rtap_len;
+ 
+ 
+@@ -4896,7 +4895,9 @@
+ 	if (unlikely(rtap_hdr.it_version))
+ 		goto fail;
+ 
+-	if (unlikely(skb->len < rtap_len))
++	if (unlikely(rtap_len < sizeof(rtap_hdr) || rtap_len > skb->len ||
++		skb->len - rtap_len < WLAN_HDR_A3_LEN ||
++		skb->len - rtap_len > MAX_XMIT_EXTBUF_SZ - TXDESC_OFFSET))
+ 		goto fail;
+ 
+ #ifndef CONFIG_MONITOR_MODE_XMIT
+@@ -4905,7 +4906,7 @@
+ 		goto fail;
+ 	}
+ #endif /* CONFIG_MONITOR_MODE_XMIT */
+-	_rtw_pktfile_read(&pktfile, dummybuf, rtap_len-sizeof(struct ieee80211_radiotap_header));
++	_rtw_pktfile_read(&pktfile, NULL, rtap_len-sizeof(struct ieee80211_radiotap_header));
+ 	len = len - rtap_len;
+ #endif
+ 	pmgntframe = alloc_mgtxmitframe(pxmitpriv);
+--- a/drivers/rtl8812au/include/rtw_recv.h
++++ b/drivers/rtl8812au/include/rtw_recv.h
+@@ -798,7 +798,7 @@
+ 
+ __inline static _buffer *get_rxbuf_desc(union recv_frame *precvframe)
+ {
+-	_buffer *buf_desc;
++	_buffer *buf_desc = NULL;
+ 
+ 	if (precvframe == NULL)
+ 		return NULL;
+@@ -823,10 +823,10 @@
+ __inline static union recv_frame *pkt_to_recvframe(_pkt *pkt)
+ {
+ 
+-	u8 *buf_star;
++	u8 *buf_star = NULL;
+ 	union recv_frame *precv_frame;
+ #ifdef PLATFORM_WINDOWS
+-	_buffer *buf_desc;
++	_buffer *buf_desc = NULL;
+ 	uint len;
+ 
+ 	NdisQueryPacket(pkt, NULL, NULL, &buf_desc, &len);
+@@ -843,7 +843,7 @@
+ 
+ 	union recv_frame *precv_frame = pkt_to_recvframe(pkt);
+ 
+-	return	precv_frame->u.hdr.rx_head;
++	return precv_frame ? precv_frame->u.hdr.rx_head : NULL;
+ 
+ }
+ 
+@@ -853,7 +853,7 @@
+ 
+ 	union recv_frame *precv_frame = pkt_to_recvframe(pkt);
+ 
+-	return	precv_frame->u.hdr.rx_data;
++	return precv_frame ? precv_frame->u.hdr.rx_data : NULL;
+ 
+ }
+ 
+--- a/drivers/rtl8812au/core/rtw_debug.c
++++ b/drivers/rtl8812au/core/rtw_debug.c
+@@ -5766,7 +5766,7 @@
+ 	struct sta_info *psta;
+ 	_list	*plist, *phead;
+ 	_irqL	 irqL;
+-	char tmp[16];
++	char tmp[16] = {0};
+ 	u8	mac_addr[NUM_STA][ETH_ALEN];
+ 	u8 bc_addr[ETH_ALEN] = {0xff, 0xff, 0xff, 0xff, 0xff, 0xff};
+ 	u32 key_type;
+@@ -5778,7 +5778,9 @@
+ 		return -EFAULT;
+ 	}
+ 
+-	if (buffer && !copy_from_user(tmp, buffer, sizeof(tmp))) {
++	if (!buffer || copy_from_user(tmp, buffer, count))
++		return -EFAULT;
++	{
+ 
+ 		int num = sscanf(tmp, "%x", &key_type);
+ 
+--- a/drivers/rtl8812au/core/rtw_mlme_ext.c
++++ b/drivers/rtl8812au/core/rtw_mlme_ext.c
+@@ -10087,7 +10087,7 @@
+ 	u16	start_seq;
+ 	u16	BA_para_set;
+ 	u16	BA_timeout_value;
+-	u16	BA_starting_seqctrl;
++	u16 BA_starting_seqctrl = 0;
+ 	struct xmit_frame		*pmgntframe;
+ 	struct pkt_attrib		*pattrib;
+ 	u8					*pframe;
+@@ -12734,7 +12734,7 @@
+ 	_rtw_memset(checkalive, 0x00, sizeof(checkalive));
+ 	_rtw_memset(teardown, 0x00, sizeof(teardown));
+ 
+-	if ((padapter->tdlsinfo.link_established == _TRUE)) {
++	if (padapter->tdlsinfo.link_established == _TRUE) {
+ 		_enter_critical_bh(&pstapriv->sta_hash_lock, &irqL);
+ 		for (i = 0; i < NUM_STA; i++) {
+ 			phead = &(pstapriv->sta_hash[i]);
+@@ -15243,7 +15243,9 @@
+ 
+ #ifdef CONFIG_SCAN_BACKOP
+ 	case SCAN_BACKING_OP: {
+-		u8 back_ch, back_bw, back_ch_offset;
++		u8 back_ch = rtw_get_oper_ch(padapter);
++		u8 back_bw = rtw_get_oper_bw(padapter);
++		u8 back_ch_offset = rtw_get_oper_choffset(padapter);
+ 		u8 need_ch_setting_union = _TRUE;
+ 
+ #ifdef CONFIG_MCC_MODE
+--- a/drivers/rtl8812au/os_dep/linux/ioctl_cfg80211.c
++++ b/drivers/rtl8812au/os_dep/linux/ioctl_cfg80211.c
+@@ -1,3 +1,5 @@
++/* Pinned android13-5.15 ACK: MLO/puncturing cfg80211 backports. */
++#define RTW_ACK_CFG80211_BACKPORT 1
+ /******************************************************************************
+  *
+  * Copyright(c) 2007 - 2017 Realtek Corporation.
+@@ -460,10 +462,10 @@
+ 
+ #if (LINUX_VERSION_CODE >= KERNEL_VERSION(3, 19, 0))
+ 	if (started) {
+-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(6, 3, 0)) && (LINUX_VERSION_CODE < KERNEL_VERSION(6, 9, 0)) \
++#if ((LINUX_VERSION_CODE >= KERNEL_VERSION(6, 3, 0) || defined(RTW_ACK_CFG80211_BACKPORT))) && (LINUX_VERSION_CODE < KERNEL_VERSION(6, 9, 0)) \
+     || (RHEL_RELEASE_CODE >= RHEL_RELEASE_VERSION(9, 0))
+ 		cfg80211_ch_switch_started_notify(adapter->pnetdev, &chdef, 0, 0, false, 0);
+-#elif (LINUX_VERSION_CODE >= KERNEL_VERSION(6, 1, 0))
++#elif ((LINUX_VERSION_CODE >= KERNEL_VERSION(6, 1, 0) || defined(RTW_ACK_CFG80211_BACKPORT)))
+ 		cfg80211_ch_switch_started_notify(adapter->pnetdev, &chdef, 0, 0, false);
+ #elif (LINUX_VERSION_CODE >= KERNEL_VERSION(5, 11, 0)) || (RHEL_RELEASE_CODE >= RHEL_RELEASE_VERSION(8,0))
+ 		cfg80211_ch_switch_started_notify(adapter->pnetdev, &chdef, 0, false);
+@@ -477,10 +479,10 @@
+ 	if (!rtw_cfg80211_allow_ch_switch_notify(adapter))
+ 		goto exit;
+ 
+-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(6, 3, 0)) && (LINUX_VERSION_CODE < KERNEL_VERSION(6, 9, 0)) \
++#if ((LINUX_VERSION_CODE >= KERNEL_VERSION(6, 3, 0) || defined(RTW_ACK_CFG80211_BACKPORT))) && (LINUX_VERSION_CODE < KERNEL_VERSION(6, 9, 0)) \
+     || (RHEL_RELEASE_CODE >= RHEL_RELEASE_VERSION(9, 0))
+ 	cfg80211_ch_switch_notify(adapter->pnetdev, &chdef, 0, 0);
+-#elif (LINUX_VERSION_CODE >= KERNEL_VERSION(5, 19, 2))
++#elif ((LINUX_VERSION_CODE >= KERNEL_VERSION(5, 19, 2) || defined(RTW_ACK_CFG80211_BACKPORT)))
+ 	cfg80211_ch_switch_notify(adapter->pnetdev, &chdef, 0);
+ #else
+ 	cfg80211_ch_switch_notify(adapter->pnetdev, &chdef);
+@@ -1160,8 +1162,8 @@
+ 		#if LINUX_VERSION_CODE < KERNEL_VERSION(6, 0, 0) 
+ 		#if RHEL_RELEASE_CODE >= RHEL_RELEASE_VERSION(9, 0)
+ 		#else
+-		roam_info.channel = notify_channel;
+-		roam_info.bssid = cur_network->network.MacAddress;
++		roam_info.links[0].channel = notify_channel;
++		roam_info.links[0].bssid = cur_network->network.MacAddress;
+ 		#endif
+ 		#endif
+ 		roam_info.req_ie = pmlmepriv->assoc_req + sizeof(struct rtw_ieee80211_hdr_3addr) + 2;
+@@ -1743,7 +1745,7 @@
+ }
+ 
+ static int cfg80211_rtw_add_key(struct wiphy *wiphy, struct net_device *ndev
+-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(6, 1, 0)) || (RHEL_RELEASE_CODE >= RHEL_RELEASE_VERSION(9, 0))
++#if ((LINUX_VERSION_CODE >= KERNEL_VERSION(6, 1, 0) || defined(RTW_ACK_CFG80211_BACKPORT))) || (RHEL_RELEASE_CODE >= RHEL_RELEASE_VERSION(9, 0))
+ 	, int link_id
+ #endif
+ 	, u8 key_index
+@@ -1890,7 +1892,7 @@
+ }
+ 
+ static int cfg80211_rtw_get_key(struct wiphy *wiphy, struct net_device *ndev
+-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(6, 1, 0)) || (RHEL_RELEASE_CODE >= RHEL_RELEASE_VERSION(9, 0))
++#if ((LINUX_VERSION_CODE >= KERNEL_VERSION(6, 1, 0) || defined(RTW_ACK_CFG80211_BACKPORT))) || (RHEL_RELEASE_CODE >= RHEL_RELEASE_VERSION(9, 0))
+ 	, int link_id
+ #endif
+ 	, u8 keyid
+@@ -2058,7 +2060,7 @@
+ }
+ 
+ static int cfg80211_rtw_del_key(struct wiphy *wiphy, struct net_device *ndev,
+-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(6, 1, 0)) || (RHEL_RELEASE_CODE >= RHEL_RELEASE_VERSION(9, 0))
++#if ((LINUX_VERSION_CODE >= KERNEL_VERSION(6, 1, 0) || defined(RTW_ACK_CFG80211_BACKPORT))) || (RHEL_RELEASE_CODE >= RHEL_RELEASE_VERSION(9, 0))
+ 	int link_id,
+ #endif
+ #if (LINUX_VERSION_CODE >= KERNEL_VERSION(2, 6, 37)) || defined(COMPAT_KERNEL_RELEASE)
+@@ -2082,7 +2084,7 @@
+ 
+ static int cfg80211_rtw_set_default_key(struct wiphy *wiphy,
+ 	struct net_device *ndev,
+-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(6, 1, 0)) || (RHEL_RELEASE_CODE >= RHEL_RELEASE_VERSION(9, 0))
++#if ((LINUX_VERSION_CODE >= KERNEL_VERSION(6, 1, 0) || defined(RTW_ACK_CFG80211_BACKPORT))) || (RHEL_RELEASE_CODE >= RHEL_RELEASE_VERSION(9, 0))
+ 	int link_id,
+ #endif
+ 	u8 key_index
+@@ -2134,7 +2136,7 @@
+ #if (LINUX_VERSION_CODE >= KERNEL_VERSION(2, 6, 30))
+ int cfg80211_rtw_set_default_mgmt_key(struct wiphy *wiphy,
+ 	struct net_device *ndev,
+-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(6, 1, 0)) || (RHEL_RELEASE_CODE >= RHEL_RELEASE_VERSION(9, 0))
++#if ((LINUX_VERSION_CODE >= KERNEL_VERSION(6, 1, 0) || defined(RTW_ACK_CFG80211_BACKPORT))) || (RHEL_RELEASE_CODE >= RHEL_RELEASE_VERSION(9, 0))
+ 	int link_id,
+ #endif
+ 	u8 key_index)
+@@ -5323,7 +5325,7 @@
+ 	return ret;
+ }
+ 
+-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(5, 19, 2)) || (RHEL_RELEASE_CODE >= RHEL_RELEASE_VERSION(9, 0))
++#if ((LINUX_VERSION_CODE >= KERNEL_VERSION(5, 19, 2) || defined(RTW_ACK_CFG80211_BACKPORT))) || (RHEL_RELEASE_CODE >= RHEL_RELEASE_VERSION(9, 0))
+ static int cfg80211_rtw_stop_ap(struct wiphy *wiphy, struct net_device *ndev, unsigned int link_id)
+ #else
+ static int cfg80211_rtw_stop_ap(struct wiphy *wiphy, struct net_device *ndev)
+@@ -6199,7 +6201,7 @@
+ 	return 0;
+ }
+ 
+-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(5, 19, 2)) || (RHEL_RELEASE_CODE >= RHEL_RELEASE_VERSION(9, 0))
++#if ((LINUX_VERSION_CODE >= KERNEL_VERSION(5, 19, 2) || defined(RTW_ACK_CFG80211_BACKPORT))) || (RHEL_RELEASE_CODE >= RHEL_RELEASE_VERSION(9, 0))
+ static int cfg80211_rtw_get_channel(struct wiphy *wiphy, struct wireless_dev *wdev, unsigned int link_id, struct cfg80211_chan_def *chandef){
+ #else
+ static int cfg80211_rtw_get_channel(struct wiphy *wiphy, struct wireless_dev *wdev, struct cfg80211_chan_def *chandef){
+@@ -10495,9 +10497,9 @@
+ 	rtw_cfg80211_indicate_scan_done(adapter, _TRUE);
+ 
+ 	#if (LINUX_VERSION_CODE >= KERNEL_VERSION(3, 11, 0)) || defined(COMPAT_KERNEL_RELEASE)
+-	#if (LINUX_VERSION_CODE >= KERNEL_VERSION(5, 19, 2)) || (RHEL_RELEASE_CODE >= RHEL_RELEASE_VERSION(9, 0))
++	#if ((LINUX_VERSION_CODE >= KERNEL_VERSION(5, 19, 2) || defined(RTW_ACK_CFG80211_BACKPORT))) || (RHEL_RELEASE_CODE >= RHEL_RELEASE_VERSION(9, 0))
+ 	if (wdev->links[0].client.current_bss) {
+-	#elif (LINUX_VERSION_CODE >= KERNEL_VERSION(5, 19, 2))
++	#elif ((LINUX_VERSION_CODE >= KERNEL_VERSION(5, 19, 2) || defined(RTW_ACK_CFG80211_BACKPORT)))
+ 	if (wdev->connected) {
+ 	#else
+ 	if (wdev->current_bss) {
+--- a/drivers/rtl8188eus/os_dep/linux/ioctl_cfg80211.c
++++ b/drivers/rtl8188eus/os_dep/linux/ioctl_cfg80211.c
+@@ -1,3 +1,5 @@
++/* Pinned android13-5.15 ACK: MLO/puncturing cfg80211 backports. */
++#define RTW_ACK_CFG80211_BACKPORT 1
+ /******************************************************************************
+  *
+  * Copyright(c) 2007 - 2017 Realtek Corporation.
+@@ -419,9 +421,9 @@
+ 
+ #if (LINUX_VERSION_CODE >= KERNEL_VERSION(6, 9, 0))
+         cfg80211_ch_switch_notify(adapter->pnetdev, &chdef, 0);
+-#elif (LINUX_VERSION_CODE >= KERNEL_VERSION(6, 3, 0))
++#elif ((LINUX_VERSION_CODE >= KERNEL_VERSION(6, 3, 0) || defined(RTW_ACK_CFG80211_BACKPORT)))
+         cfg80211_ch_switch_notify(adapter->pnetdev, &chdef, 0, 0);
+-#elif (LINUX_VERSION_CODE >= KERNEL_VERSION(5, 19, 0))
++#elif ((LINUX_VERSION_CODE >= KERNEL_VERSION(5, 19, 0) || defined(RTW_ACK_CFG80211_BACKPORT)))
+ 	cfg80211_ch_switch_notify(adapter->pnetdev, &chdef, 0);
+ #else
+ 	cfg80211_ch_switch_notify(adapter->pnetdev, &chdef);
+@@ -1099,7 +1101,7 @@
+ 		u32 freq;
+ 		u16 channel = cur_network->network.Configuration.DSConfig;
+ #if (LINUX_VERSION_CODE >= KERNEL_VERSION(4, 12, 0) || defined(RHEL79))
+-		struct cfg80211_roam_info roam_info;
++		struct cfg80211_roam_info roam_info = {0};
+ #endif
+ 
+ 		freq = rtw_ch2freq(channel);
+@@ -1107,7 +1109,7 @@
+ 		#endif
+ 
+ 		#if (LINUX_VERSION_CODE >= KERNEL_VERSION(4, 12, 0) || defined(RHEL79))
+-		#if (LINUX_VERSION_CODE >= KERNEL_VERSION(6, 0, 0))
++		#if ((LINUX_VERSION_CODE >= KERNEL_VERSION(6, 0, 0) || defined(RTW_ACK_CFG80211_BACKPORT)))
+                 roam_info.links[0].channel = notify_channel;
+ 		roam_info.links[0].bssid = cur_network->network.MacAddress;
+ 		#else
+@@ -1669,7 +1671,7 @@
+ }
+ 
+ static int cfg80211_rtw_add_key(struct wiphy *wiphy, struct net_device *ndev
+-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(6, 1, 0))
++#if ((LINUX_VERSION_CODE >= KERNEL_VERSION(6, 1, 0) || defined(RTW_ACK_CFG80211_BACKPORT)))
+         , int link_id
+ #endif
+ 	, u8 key_index
+@@ -1816,7 +1818,7 @@
+ }
+ 
+ static int cfg80211_rtw_get_key(struct wiphy *wiphy, struct net_device *ndev
+-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(6, 1, 0))
++#if ((LINUX_VERSION_CODE >= KERNEL_VERSION(6, 1, 0) || defined(RTW_ACK_CFG80211_BACKPORT)))
+         , int link_id
+ #endif
+ 	, u8 keyid
+@@ -1984,7 +1986,7 @@
+ }
+ 
+ static int cfg80211_rtw_del_key(struct wiphy *wiphy, struct net_device *ndev,
+-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(6, 1, 0))
++#if ((LINUX_VERSION_CODE >= KERNEL_VERSION(6, 1, 0) || defined(RTW_ACK_CFG80211_BACKPORT)))
+         int link_id,
+ #endif
+ #if (LINUX_VERSION_CODE >= KERNEL_VERSION(2, 6, 37)) || defined(COMPAT_KERNEL_RELEASE)
+@@ -2008,7 +2010,7 @@
+ 
+ static int cfg80211_rtw_set_default_key(struct wiphy *wiphy,
+ 	struct net_device *ndev,
+-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(6, 1, 0))
++#if ((LINUX_VERSION_CODE >= KERNEL_VERSION(6, 1, 0) || defined(RTW_ACK_CFG80211_BACKPORT)))
+         int link_id,
+ #endif
+         u8 key_index
+@@ -2060,7 +2062,7 @@
+ #if (LINUX_VERSION_CODE >= KERNEL_VERSION(2, 6, 30))
+ int cfg80211_rtw_set_default_mgmt_key(struct wiphy *wiphy,
+ 	struct net_device *ndev,
+-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(6, 1, 0))
++#if ((LINUX_VERSION_CODE >= KERNEL_VERSION(6, 1, 0) || defined(RTW_ACK_CFG80211_BACKPORT)))
+         int link_id,
+ #endif
+         u8 key_index)
+@@ -4917,7 +4919,7 @@
+ 	return ret;
+ }
+ 
+-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(5, 19, 0))
++#if ((LINUX_VERSION_CODE >= KERNEL_VERSION(5, 19, 0) || defined(RTW_ACK_CFG80211_BACKPORT)))
+ static int cfg80211_rtw_stop_ap(struct wiphy *wiphy, struct net_device *ndev, unsigned int link_id)
+ #else
+ static int cfg80211_rtw_stop_ap(struct wiphy *wiphy, struct net_device *ndev)
+@@ -9679,7 +9681,7 @@
+ 	rtw_cfg80211_indicate_scan_done(adapter, _TRUE);
+ 
+ 	#if (LINUX_VERSION_CODE >= KERNEL_VERSION(3, 11, 0)) || defined(COMPAT_KERNEL_RELEASE)
+-	#if (LINUX_VERSION_CODE >= KERNEL_VERSION(5, 19, 0))
++	#if ((LINUX_VERSION_CODE >= KERNEL_VERSION(5, 19, 0) || defined(RTW_ACK_CFG80211_BACKPORT)))
+ 	if (wdev->connected) {
+ 	#else
+ 	if (wdev->current_bss) {
+--- a/drivers/rtl8812bu/os_dep/linux/ioctl_cfg80211.c
++++ b/drivers/rtl8812bu/os_dep/linux/ioctl_cfg80211.c
+@@ -1,3 +1,5 @@
++/* Pinned android13-5.15 ACK: MLO/puncturing cfg80211 backports. */
++#define RTW_ACK_CFG80211_BACKPORT 1
+ /******************************************************************************
+  *
+  * Copyright(c) 2007 - 2019 Realtek Corporation.
+@@ -464,8 +466,8 @@
+ 		 *  called by others with block-tx.
+ 		 */
+ 
+-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(6, 1, 0) || defined(RHEL88))
+-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(6, 3, 0) && (LINUX_VERSION_CODE < KERNEL_VERSION(6, 9, 0))) || (defined(RHEL89) && !defined(RHEL95))
++#if ((LINUX_VERSION_CODE >= KERNEL_VERSION(6, 1, 0) || defined(RTW_ACK_CFG80211_BACKPORT)) || defined(RHEL88))
++#if ((LINUX_VERSION_CODE >= KERNEL_VERSION(6, 3, 0) || defined(RTW_ACK_CFG80211_BACKPORT)) && (LINUX_VERSION_CODE < KERNEL_VERSION(6, 9, 0))) || (defined(RHEL89) && !defined(RHEL95))
+ 		cfg80211_ch_switch_started_notify(adapter->pnetdev, &chdef, 0, 0, false, 0);
+ #else
+ 		cfg80211_ch_switch_started_notify(adapter->pnetdev, &chdef, 0, 0, false);
+@@ -483,8 +485,8 @@
+ 	if (!rtw_cfg80211_allow_ch_switch_notify(adapter))
+ 		goto exit;
+ 
+-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(5, 19, 2) || defined(RHEL88))
+-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(6, 3, 0) && (LINUX_VERSION_CODE < KERNEL_VERSION(6, 9, 0))) || (defined(RHEL89) && !defined(RHEL95))
++#if ((LINUX_VERSION_CODE >= KERNEL_VERSION(5, 19, 2) || defined(RTW_ACK_CFG80211_BACKPORT)) || defined(RHEL88))
++#if ((LINUX_VERSION_CODE >= KERNEL_VERSION(6, 3, 0) || defined(RTW_ACK_CFG80211_BACKPORT)) && (LINUX_VERSION_CODE < KERNEL_VERSION(6, 9, 0))) || (defined(RHEL89) && !defined(RHEL95))
+ 	cfg80211_ch_switch_notify(adapter->pnetdev, &chdef, 0, 0);
+ #else
+ 	cfg80211_ch_switch_notify(adapter->pnetdev, &chdef, 0);
+@@ -506,7 +508,7 @@
+ 	}
+ 
+ 	ctype = rtw_chbw_to_nl80211_channel_type(ch, bw, offset, ht);
+-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(5, 19, 2) || defined(RHEL88))
++#if ((LINUX_VERSION_CODE >= KERNEL_VERSION(5, 19, 2) || defined(RTW_ACK_CFG80211_BACKPORT)) || defined(RHEL88))
+ 	cfg80211_ch_switch_notify(adapter->pnetdev, freq, ctype, 0);
+ #else
+ 	cfg80211_ch_switch_notify(adapter->pnetdev, freq, ctype);
+@@ -1159,7 +1161,7 @@
+ 		#endif
+ 
+ 		#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 12, 0)
+-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(6, 0, 0) || defined(RHEL88))
++#if ((LINUX_VERSION_CODE >= KERNEL_VERSION(6, 0, 0) || defined(RTW_ACK_CFG80211_BACKPORT)) || defined(RHEL88))
+ 		roam_info.links[0].bssid = cur_network->network.MacAddress;
+ #else
+ 		roam_info.bssid = cur_network->network.MacAddress;
+@@ -1924,7 +1926,7 @@
+ 
+ #if (LINUX_VERSION_CODE >= KERNEL_VERSION(7, 0, 0))
+ static int cfg80211_rtw_add_key(struct wiphy *wiphy, struct wireless_dev *wdev
+-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(6, 1, 0) || defined(RHEL88))
++#if ((LINUX_VERSION_CODE >= KERNEL_VERSION(6, 1, 0) || defined(RTW_ACK_CFG80211_BACKPORT)) || defined(RHEL88))
+ 	, int link_id
+ #endif
+ 	, u8 key_index
+@@ -1936,7 +1938,7 @@
+ 	struct net_device *ndev = wdev->netdev;
+ #else
+ static int cfg80211_rtw_add_key(struct wiphy *wiphy, struct net_device *ndev
+-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(6, 1, 0) || defined(RHEL88))
++#if ((LINUX_VERSION_CODE >= KERNEL_VERSION(6, 1, 0) || defined(RTW_ACK_CFG80211_BACKPORT)) || defined(RHEL88))
+ 	, int link_id
+ #endif
+ 	, u8 key_index
+@@ -2104,7 +2106,7 @@
+ 
+ #if (LINUX_VERSION_CODE >= KERNEL_VERSION(7, 0, 0))
+ static int cfg80211_rtw_get_key(struct wiphy *wiphy, struct wireless_dev *wdev
+-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(6, 1, 0) || defined(RHEL88))
++#if ((LINUX_VERSION_CODE >= KERNEL_VERSION(6, 1, 0) || defined(RTW_ACK_CFG80211_BACKPORT)) || defined(RHEL88))
+ 	, int link_id
+ #endif
+ 	, u8 keyid
+@@ -2117,7 +2119,7 @@
+ 	struct net_device *ndev = wdev->netdev;
+ #else
+ static int cfg80211_rtw_get_key(struct wiphy *wiphy, struct net_device *ndev
+-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(6, 1, 0) || defined(RHEL88))
++#if ((LINUX_VERSION_CODE >= KERNEL_VERSION(6, 1, 0) || defined(RTW_ACK_CFG80211_BACKPORT)) || defined(RHEL88))
+ 	, int link_id
+ #endif
+ 	, u8 keyid
+@@ -2311,7 +2313,7 @@
+ 
+ #if (LINUX_VERSION_CODE >= KERNEL_VERSION(7, 0, 0))
+ static int cfg80211_rtw_del_key(struct wiphy *wiphy, struct wireless_dev *wdev,
+-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(6, 1, 0) || defined(RHEL88))
++#if ((LINUX_VERSION_CODE >= KERNEL_VERSION(6, 1, 0) || defined(RTW_ACK_CFG80211_BACKPORT)) || defined(RHEL88))
+ 	int link_id,
+ #endif
+ #if (LINUX_VERSION_CODE >= KERNEL_VERSION(2, 6, 37)) || defined(COMPAT_KERNEL_RELEASE)
+@@ -2323,7 +2325,7 @@
+ 	struct net_device *ndev = wdev->netdev;
+ #else
+ static int cfg80211_rtw_del_key(struct wiphy *wiphy, struct net_device *ndev,
+-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(6, 1, 0) || defined(RHEL88))
++#if ((LINUX_VERSION_CODE >= KERNEL_VERSION(6, 1, 0) || defined(RTW_ACK_CFG80211_BACKPORT)) || defined(RHEL88))
+ 	int link_id,
+ #endif
+ #if (LINUX_VERSION_CODE >= KERNEL_VERSION(2, 6, 37)) || defined(COMPAT_KERNEL_RELEASE)
+@@ -2349,7 +2351,7 @@
+ 
+ static int cfg80211_rtw_set_default_key(struct wiphy *wiphy,
+ 	struct net_device *ndev,
+-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(6, 1, 0) || defined(RHEL88))
++#if ((LINUX_VERSION_CODE >= KERNEL_VERSION(6, 1, 0) || defined(RTW_ACK_CFG80211_BACKPORT)) || defined(RHEL88))
+ 	int link_id,
+ #endif
+ 	u8 key_index
+@@ -2402,7 +2404,7 @@
+ #if (LINUX_VERSION_CODE >= KERNEL_VERSION(7, 0, 0))
+ int cfg80211_rtw_set_default_mgmt_key(struct wiphy *wiphy,
+ 	struct wireless_dev *wdev,
+-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(6, 1, 0) || defined(RHEL88))
++#if ((LINUX_VERSION_CODE >= KERNEL_VERSION(6, 1, 0) || defined(RTW_ACK_CFG80211_BACKPORT)) || defined(RHEL88))
+ 	int link_id,
+ #endif
+ 	u8 key_index)
+@@ -2411,7 +2413,7 @@
+ #else
+ int cfg80211_rtw_set_default_mgmt_key(struct wiphy *wiphy,
+ 	struct net_device *ndev,
+-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(6, 1, 0) || defined(RHEL88))
++#if ((LINUX_VERSION_CODE >= KERNEL_VERSION(6, 1, 0) || defined(RTW_ACK_CFG80211_BACKPORT)) || defined(RHEL88))
+ 	int link_id,
+ #endif
+ 	u8 key_index)
+@@ -5522,7 +5524,7 @@
+ 	return ret;
+ }
+ 
+-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(5, 19, 2) || defined(RHEL88))
++#if ((LINUX_VERSION_CODE >= KERNEL_VERSION(5, 19, 2) || defined(RTW_ACK_CFG80211_BACKPORT)) || defined(RHEL88))
+ static int cfg80211_rtw_stop_ap(struct wiphy *wiphy, struct net_device *ndev,
+ 		unsigned int link_id)
+ #else
+@@ -6964,7 +6966,7 @@
+ 
+ #if (LINUX_VERSION_CODE >= KERNEL_VERSION(3, 8, 0))
+ static int cfg80211_rtw_get_channel(struct wiphy *wiphy,
+-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(5, 19, 2) || defined(RHEL88))
++#if ((LINUX_VERSION_CODE >= KERNEL_VERSION(5, 19, 2) || defined(RTW_ACK_CFG80211_BACKPORT)) || defined(RHEL88))
+ 	struct wireless_dev *wdev, unsigned int link_id,
+ #else
+ 	struct wireless_dev *wdev,
+@@ -10909,7 +10911,7 @@
+ 	rtw_cfg80211_indicate_scan_done(adapter, _TRUE);
+ 
+ 	#if (LINUX_VERSION_CODE >= KERNEL_VERSION(3, 11, 0)) || defined(COMPAT_KERNEL_RELEASE)
+-	#if (LINUX_VERSION_CODE >= KERNEL_VERSION(5, 19, 2) || defined(RHEL88))
++	#if ((LINUX_VERSION_CODE >= KERNEL_VERSION(5, 19, 2) || defined(RTW_ACK_CFG80211_BACKPORT)) || defined(RHEL88))
+ 	if (wdev->links[0].client.current_bss) {
+ 	#else
+ 	if (wdev->current_bss) {
+--- a/drivers/rtl8812au/hal/rtl8814a/rtl8814a_hal_init.c
++++ b/drivers/rtl8812au/hal/rtl8814a/rtl8814a_hal_init.c
+@@ -6538,7 +6538,7 @@
+ 			break;
+ 
+ 		case HAL_DEF_EXPLICIT_BEAMFORMER:
+-			if (pHalData->rf_type != RF_1T2R || pHalData->rf_type != RF_1T1R)/*1T?R not support mer*/
++			if (pHalData->rf_type != RF_1T2R && pHalData->rf_type != RF_1T1R)/*1T?R not support mer*/
+ 				*((PBOOLEAN)pval) = _TRUE;
+ 			else
+ 				*((PBOOLEAN)pval) = _FALSE;
+--- a/drivers/rtl8812au/hal/phydm/phydm_api.c
++++ b/drivers/rtl8812au/hal/phydm/phydm_api.c
+@@ -2058,7 +2058,7 @@
+ 
+ 	#if ODM_IC_11N_SERIES_SUPPORT
+ 	if (dm->support_ic_type & ODM_IC_11N_SERIES) {
+-		if (power_offset > -8 || power_offset < 7) {
++		if (power_offset >= -8 && power_offset <= 7) {
+ 			if (add_half_db)
+ 				power_idx += 1;
+ 
+@@ -2713,7 +2713,7 @@
+ 
+ 		default:
+ 			PHYDM_DBG(dm, ODM_PHY_CONFIG, "Invalid HWrate!\n");
+-			break;
++			return INVALID_TXAGC_DATA;
+ 		}
+ 	} else if (path == RF_PATH_B) {
+ 		switch (hw_rate) {
+@@ -2835,10 +2835,11 @@
+ 
+ 		default:
+ 			PHYDM_DBG(dm, ODM_PHY_CONFIG, "Invalid HWrate!\n");
+-			break;
++			return INVALID_TXAGC_DATA;
+ 		}
+ 	} else {
+ 		PHYDM_DBG(dm, ODM_PHY_CONFIG, "Invalid RF path!!\n");
++		return INVALID_TXAGC_DATA;
+ 	}
+ 	read_back_data = (u8)odm_get_bb_reg(dm, reg_txagc, reg_mask);
+ 	PHYDM_DBG(dm, ODM_PHY_CONFIG, "%s: path-%d rate index 0x%x = 0x%x\n",
+--- a/drivers/rtl8812bu/hal/phydm/phydm_api.c
++++ b/drivers/rtl8812bu/hal/phydm/phydm_api.c
+@@ -3246,7 +3246,7 @@
+ 
+ 		default:
+ 			PHYDM_DBG(dm, ODM_PHY_CONFIG, "Invalid HWrate!\n");
+-			break;
++			return INVALID_TXAGC_DATA;
+ 		}
+ 	} else if (path == RF_PATH_B) {
+ 		switch (hw_rate) {
+@@ -3368,10 +3368,11 @@
+ 
+ 		default:
+ 			PHYDM_DBG(dm, ODM_PHY_CONFIG, "Invalid HWrate!\n");
+-			break;
++			return INVALID_TXAGC_DATA;
+ 		}
+ 	} else {
+ 		PHYDM_DBG(dm, ODM_PHY_CONFIG, "Invalid RF path!!\n");
++		return INVALID_TXAGC_DATA;
+ 	}
+ 	read_back_data = (u8)odm_get_bb_reg(dm, reg_txagc, reg_mask);
+ 	PHYDM_DBG(dm, ODM_PHY_CONFIG, "%s: path-%d rate index 0x%x = 0x%x\n",
+--- a/drivers/rtl8188eus/os_dep/linux/usb_intf.c
++++ b/drivers/rtl8188eus/os_dep/linux/usb_intf.c
+@@ -1657,3 +1657,5 @@
+ }
+ EXPORT_SYMBOL(rtw_usb_get_sw_pointer);
+ #endif /* CONFIG_INTEL_PROXIM */
++
++MODULE_IMPORT_NS(VFS_internal_I_am_really_a_filesystem_and_am_NOT_a_driver);
+--- a/drivers/rtl8188eus/hal/phydm/phydm_debug.c
++++ b/drivers/rtl8188eus/hal/phydm/phydm_debug.c
+@@ -887,7 +887,7 @@
+ 		else if (*dm->band_width == CHANNEL_WIDTH_40)
+ 			factor = "128/108";
+ 		else if (*dm->band_width == CHANNEL_WIDTH_20) {
+-			if (rx_ht != 2 || rx_ht != 1)
++			if (rx_ht == 2 || rx_ht == 1)
+ 				factor = "64/52";	/*HT or VHT*/
+ 			else
+ 				factor = "64/48";	/*legacy*/
+--- a/drivers/rtl8188eus/hal/phydm/phydm_api.c
++++ b/drivers/rtl8188eus/hal/phydm/phydm_api.c
+@@ -1128,7 +1128,7 @@
+ 
+ 	#if	ODM_IC_11AC_SERIES_SUPPORT
+ 	if (dm->support_ic_type & ODM_IC_11AC_SERIES) {
+-		if (power_offset > -16 || power_offset < 15) {
++		if (power_offset >= -16 && power_offset <= 15) {
+ 			if (add_half_db)
+ 				power_idx += 1;
+ 
+@@ -1145,7 +1145,7 @@
+ 	
+ 	#if	ODM_IC_11N_SERIES_SUPPORT
+ 	if (dm->support_ic_type & ODM_IC_11N_SERIES) {
+-		if (power_offset > -8 || power_offset < 7) {
++		if (power_offset >= -8 && power_offset <= 7) {
+ 			if (add_half_db)
+ 				power_idx += 1;
+ 
+--- a/drivers/rtl8812bu/core/rtw_mlme_ext.c
++++ b/drivers/rtl8812bu/core/rtw_mlme_ext.c
+@@ -10267,7 +10267,7 @@
+ 	u16	start_seq;
+ 	u16	BA_para_set;
+ 	u16	BA_timeout_value;
+-	u16	BA_starting_seqctrl;
++	u16 BA_starting_seqctrl = 0;
+ 	struct xmit_frame		*pmgntframe;
+ 	struct pkt_attrib		*pattrib;
+ 	u8					*pframe;
+@@ -12721,7 +12721,7 @@
+ 	_rtw_memset(checkalive, 0x00, sizeof(checkalive));
+ 	_rtw_memset(teardown, 0x00, sizeof(teardown));
+ 
+-	if ((padapter->tdlsinfo.link_established == _TRUE)) {
++	if (padapter->tdlsinfo.link_established == _TRUE) {
+ 		_enter_critical_bh(&pstapriv->sta_hash_lock, &irqL);
+ 		for (i = 0; i < NUM_STA; i++) {
+ 			phead = &(pstapriv->sta_hash[i]);
+@@ -15050,7 +15050,9 @@
+ 
+ #ifdef CONFIG_SCAN_BACKOP
+ 	case SCAN_BACKING_OP: {
+-		u8 back_ch, back_bw, back_ch_offset;
++		u8 back_ch = rtw_get_oper_ch(padapter);
++		u8 back_bw = rtw_get_oper_bw(padapter);
++		u8 back_ch_offset = rtw_get_oper_choffset(padapter);
+ 		u8 need_ch_setting_union = _TRUE;
+ 
+ #ifdef CONFIG_MCC_MODE
+--- a/drivers/rtl8812bu/hal/hal_dm.c
++++ b/drivers/rtl8812bu/hal/hal_dm.c
+@@ -639,7 +639,7 @@
+ 		return;
+ 	}
+ 
+-	if ((pregpriv->wifi_spec == 1)) { /* || (pmlmeinfo->HT_enable == 0)) */
++	if (pregpriv->wifi_spec == 1) { /* || (pmlmeinfo->HT_enable == 0)) */
+ 		precvpriv->is_any_non_be_pkts = _FALSE;
+ 		return;
+ 	}
+--- a/drivers/rtl8812bu/hal/hal_halmac.c
++++ b/drivers/rtl8812bu/hal/hal_halmac.c
+@@ -628,7 +628,7 @@
+ 		if (status == HALMAC_CMD_PROCESS_RCVD)
+ 			return _FALSE;
+ 		if ((status != HALMAC_CMD_PROCESS_DONE)
+-		    || (status != HALMAC_CMD_PROCESS_ERROR))
++		    && (status != HALMAC_CMD_PROCESS_ERROR))
+ 			RTW_WARN("%s: %s unexpected status(0x%x)!\n",
+ 				 __FUNCTION__, RTW_HALMAC_FEATURE_NAME[id],
+ 				 status);
+--- a/drivers/rtl8812au/core/rtw_xmit.c
++++ b/drivers/rtl8812au/core/rtw_xmit.c
+@@ -4433,10 +4433,11 @@
+ 	if (unlikely(rtap_hdr->it_version))
+ 		goto fail;
+ 
+-	if (unlikely(skb->len < rtap_len))
+-		goto fail;
+-
+-	if (unlikely(rtap_len < sizeof(struct ieee80211_radiotap_header)))
++	/* Bound both copy destinations before consuming packet bytes. */
++	if (unlikely(rtap_len < sizeof(*rtap_hdr) ||
++		rtap_len > sizeof(rtap_buf) || rtap_len > skb->len ||
++		skb->len - rtap_len < WLAN_HDR_A3_LEN ||
++		skb->len - rtap_len > MAX_XMIT_EXTBUF_SZ - TXDESC_OFFSET))
+ 		goto fail;
+ 
+ 	len -= sizeof(struct ieee80211_radiotap_header);
+--- a/drivers/rtl8188eus/core/rtw_xmit.c
++++ b/drivers/rtl8188eus/core/rtw_xmit.c
+@@ -4347,15 +4347,14 @@
+ 	u16 frame_ctl;
+ 	struct ieee80211_radiotap_header rtap_hdr;
+ 	_adapter *padapter = (_adapter *)rtw_netdev_priv(ndev);
+-	struct pkt_file pktfile;
++	struct pkt_file pktfile = {0};
+ 	struct rtw_ieee80211_hdr *pwlanhdr;
+ 	struct pkt_attrib	*pattrib;
+ 	struct xmit_frame		*pmgntframe;
+ 	struct mlme_ext_priv	*pmlmeext = &(padapter->mlmeextpriv);
+ 	struct xmit_priv	*pxmitpriv = &(padapter->xmitpriv);
+ 	unsigned char	*pframe;
+-	u8 dummybuf[32];
+-	int len = skb->len, rtap_len, consume;
++	int len = skb->len, rtap_len;
+ 
+ 	if (skb)
+ 		rtw_mstat_update(MSTAT_TYPE_SKB, MSTAT_ALLOC_SUCCESS, skb->truesize);
+@@ -4369,18 +4368,15 @@
+ 	if (unlikely(rtap_hdr.it_version))
+ 		goto fail;
+ 
+-	if (unlikely(skb->len < rtap_len))
++	/* Check lengths before subtracting or copying the frame. */
++	if (unlikely(rtap_len < sizeof(rtap_hdr) || rtap_len > skb->len ||
++		skb->len - rtap_len < WLAN_HDR_A3_LEN ||
++		skb->len - rtap_len > MAX_XMIT_EXTBUF_SZ - TXDESC_OFFSET))
+ 		goto fail;
+ 
+-	len -= sizeof(struct ieee80211_radiotap_header);
+-	rtap_len -= sizeof(struct ieee80211_radiotap_header);
+-
+-	while(rtap_len) {
+-		consume = rtap_len > sizeof(dummybuf) ? sizeof(dummybuf) : rtap_len;
+-		_rtw_pktfile_read(&pktfile, dummybuf, consume);
+-		rtap_len -= consume;
+-		len -= consume;
+-	}
++	/* Skip radiotap bytes without a temporary copy or signed loop. */
++	_rtw_pktfile_read(&pktfile, NULL, rtap_len - sizeof(rtap_hdr));
++	len -= rtap_len;
+ 
+ 	pmgntframe = alloc_mgtxmitframe(pxmitpriv);
+ 	if (pmgntframe == NULL) {
+--- a/drivers/rtl8188eus/os_dep/linux/xmit_linux.c
++++ b/drivers/rtl8188eus/os_dep/linux/xmit_linux.c
+@@ -513,7 +513,7 @@
+ 	return 0;
+ }
+ 
+-int rtw_xmit_entry(_pkt *pkt, _nic_hdl pnetdev)
++netdev_tx_t rtw_xmit_entry(_pkt *pkt, _nic_hdl pnetdev)
+ {
+ 	_adapter *padapter = (_adapter *)rtw_netdev_priv(pnetdev);
+ 	struct	mlme_priv	*pmlmepriv = &(padapter->mlmepriv);
+--- a/drivers/rtl8188eus/include/xmit_osdep.h
++++ b/drivers/rtl8188eus/include/xmit_osdep.h
+@@ -68,7 +68,7 @@
+ struct xmit_buf;
+ 
+ extern int _rtw_xmit_entry(_pkt *pkt, _nic_hdl pnetdev);
+-extern int rtw_xmit_entry(_pkt *pkt, _nic_hdl pnetdev);
++extern netdev_tx_t rtw_xmit_entry(_pkt *pkt, _nic_hdl pnetdev);
+ 
+ #endif /* PLATFORM_LINUX */
+ 
+--- a/drivers/rtl8812bu/os_dep/linux/xmit_linux.c
++++ b/drivers/rtl8812bu/os_dep/linux/xmit_linux.c
+@@ -514,7 +514,7 @@
+ }
+ #endif
+ 
+-int rtw_xmit_entry(_pkt *pkt, _nic_hdl pnetdev)
++netdev_tx_t rtw_xmit_entry(_pkt *pkt, _nic_hdl pnetdev)
+ {
+ 	_adapter *padapter = (_adapter *)rtw_netdev_priv(pnetdev);
+ 	struct	mlme_priv	*pmlmepriv = &(padapter->mlmepriv);
+--- a/drivers/rtl8812bu/include/xmit_osdep.h
++++ b/drivers/rtl8812bu/include/xmit_osdep.h
+@@ -68,7 +68,7 @@
+ struct xmit_buf;
+ 
+ extern int _rtw_xmit_entry(_pkt *pkt, _nic_hdl pnetdev);
+-extern int rtw_xmit_entry(_pkt *pkt, _nic_hdl pnetdev);
++extern netdev_tx_t rtw_xmit_entry(_pkt *pkt, _nic_hdl pnetdev);
+ 
+ #endif /* PLATFORM_LINUX */
+ 
+--- a/drivers/rtl8812au/os_dep/linux/ioctl_cfg80211.c
++++ b/drivers/rtl8812au/os_dep/linux/ioctl_cfg80211.c
+@@ -4657,7 +4657,7 @@
+ 	return ret;
+ }
+ 
+-static int rtw_cfg80211_monitor_if_xmit_entry(struct sk_buff *skb, struct net_device *ndev)
++static netdev_tx_t rtw_cfg80211_monitor_if_xmit_entry(struct sk_buff *skb, struct net_device *ndev)
+ {
+ 	int ret = 0;
+ 	int rtap_len;
+--- a/drivers/rtl8188eus/os_dep/linux/ioctl_cfg80211.c
++++ b/drivers/rtl8188eus/os_dep/linux/ioctl_cfg80211.c
+@@ -4283,7 +4283,7 @@
+ 	return ret;
+ }
+ 
+-static int rtw_cfg80211_monitor_if_xmit_entry(struct sk_buff *skb, struct net_device *ndev)
++static netdev_tx_t rtw_cfg80211_monitor_if_xmit_entry(struct sk_buff *skb, struct net_device *ndev)
+ {
+ 	int ret = 0;
+ 	int rtap_len;
+--- a/drivers/rtl8812bu/os_dep/linux/ioctl_cfg80211.c
++++ b/drivers/rtl8812bu/os_dep/linux/ioctl_cfg80211.c
+@@ -4910,7 +4910,7 @@
+ 	return ret;
+ }
+ 
+-static int rtw_cfg80211_monitor_if_xmit_entry(struct sk_buff *skb, struct net_device *ndev)
++static netdev_tx_t rtw_cfg80211_monitor_if_xmit_entry(struct sk_buff *skb, struct net_device *ndev)
+ {
+ 	int ret = 0;
+ 	int rtap_len;
+--- a/drivers/rtl8812au/hal/rtl8812a/usb/rtl8812au_xmit.c
++++ b/drivers/rtl8812au/hal/rtl8812a/usb/rtl8812au_xmit.c
+@@ -18,6 +18,14 @@
+ #include <rtl8812a_hal.h>
+ 
+ 
++#ifdef PLATFORM_LINUX
++/* Match tasklet_init's actual unsigned-long callback type under Clang CFI. */
++static void rtl8812au_xmit_tasklet_cfi(unsigned long data)
++{
++	rtl8812au_xmit_tasklet((void *)data);
++}
++#endif
++
+ s32	rtl8812au_init_xmit_priv(_adapter *padapter)
+ {
+ 	struct xmit_priv	*pxmitpriv = &padapter->xmitpriv;
+@@ -25,7 +33,7 @@
+ 
+ #ifdef PLATFORM_LINUX
+ 	tasklet_init(&pxmitpriv->xmit_tasklet,
+-		     (void(*)(unsigned long))rtl8812au_xmit_tasklet,
++		     rtl8812au_xmit_tasklet_cfi,
+ 		     (unsigned long)padapter);
+ #endif
+ #ifdef CONFIG_TX_EARLY_MODE
+--- a/drivers/rtl8812au/hal/rtl8814a/usb/rtl8814au_xmit.c
++++ b/drivers/rtl8812au/hal/rtl8814a/usb/rtl8814au_xmit.c
+@@ -18,6 +18,14 @@
+ #include <rtl8814a_hal.h>
+ 
+ 
++#ifdef PLATFORM_LINUX
++/* Match tasklet_init's actual unsigned-long callback type under Clang CFI. */
++static void rtl8814au_xmit_tasklet_cfi(unsigned long data)
++{
++	rtl8814au_xmit_tasklet((void *)data);
++}
++#endif
++
+ s32	rtl8814au_init_xmit_priv(_adapter *padapter)
+ {
+ 	struct xmit_priv	*pxmitpriv = &padapter->xmitpriv;
+@@ -25,7 +33,7 @@
+ 
+ #ifdef PLATFORM_LINUX
+ 	tasklet_init(&pxmitpriv->xmit_tasklet,
+-	     (void(*)(unsigned long))rtl8814au_xmit_tasklet,
++	     rtl8814au_xmit_tasklet_cfi,
+ 	     (unsigned long)padapter);
+ #endif
+ #ifdef CONFIG_TX_EARLY_MODE
+--- a/drivers/rtl8188eus/hal/rtl8188e/usb/rtl8188eu_xmit.c
++++ b/drivers/rtl8188eus/hal/rtl8188e/usb/rtl8188eu_xmit.c
+@@ -18,6 +18,14 @@
+ #include <rtl8188e_hal.h>
+ 
+ 
++#ifdef PLATFORM_LINUX
++/* Match tasklet_init's actual unsigned-long callback type under Clang CFI. */
++static void rtl8188eu_xmit_tasklet_cfi(unsigned long data)
++{
++	rtl8188eu_xmit_tasklet((void *)data);
++}
++#endif
++
+ s32	rtl8188eu_init_xmit_priv(_adapter *padapter)
+ {
+ 	struct xmit_priv	*pxmitpriv = &padapter->xmitpriv;
+@@ -25,7 +33,7 @@
+ 
+ #ifdef PLATFORM_LINUX
+ 	tasklet_init(&pxmitpriv->xmit_tasklet,
+-		     (void(*)(unsigned long))rtl8188eu_xmit_tasklet,
++		     rtl8188eu_xmit_tasklet_cfi,
+ 		     (unsigned long)padapter);
+ #endif
+ #ifdef CONFIG_TX_EARLY_MODE
+--- a/drivers/rtl8812bu/hal/rtl8822b/usb/rtl8822bu_xmit.c
++++ b/drivers/rtl8812bu/hal/rtl8822b/usb/rtl8822bu_xmit.c
+@@ -871,6 +871,14 @@
+ 
+ }
+ 
++#ifdef PLATFORM_LINUX
++/* Match tasklet_init's actual unsigned-long callback type under Clang CFI. */
++static void rtl8822bu_xmit_tasklet_cfi(unsigned long data)
++{
++	rtl8822bu_xmit_tasklet((void *)data);
++}
++#endif
++
+ s32	rtl8822bu_init_xmit_priv(PADAPTER padapter)
+ {
+ 	struct xmit_priv *pxmitpriv = &padapter->xmitpriv;
+@@ -879,9 +887,9 @@
+ #ifdef PLATFORM_LINUX
+ 	tasklet_init(&pxmitpriv->xmit_tasklet,
+ #if (LINUX_VERSION_CODE < KERNEL_VERSION(5, 17, 0) && !defined(RHEL92))
+-		     (void(*)(unsigned long))rtl8822bu_xmit_tasklet,
++		     rtl8822bu_xmit_tasklet_cfi,
+ #else
+-		     (void *)rtl8822bu_xmit_tasklet,
++		     rtl8822bu_xmit_tasklet_cfi,
+ #endif
+ 		     (unsigned long)padapter);
+ #endif
+--- a/drivers/rtl8812bu/os_dep/linux/ioctl_cfg80211.c
++++ b/drivers/rtl8812bu/os_dep/linux/ioctl_cfg80211.c
+@@ -4660,6 +4660,11 @@
+ }
+ #endif	/*	CONFIG_RTW_DEBUG	*/
+ 
++static void rtw_hal_update_txpwr_level_cfi(void *context)
++{
++	rtw_hal_update_txpwr_level((_adapter *)context);
++}
++
+ static int cfg80211_rtw_set_txpower(struct wiphy *wiphy,
+ #if (LINUX_VERSION_CODE >= KERNEL_VERSION(3, 8, 0))
+ 	struct wireless_dev *wdev,
+@@ -4719,7 +4724,7 @@
+ 	}
+ 
+ 	if (ret == 0)
+-		rtw_run_in_thread_cmd_wait(adapter, ((void *)(rtw_hal_update_txpwr_level)), adapter, 2000);
++		rtw_run_in_thread_cmd_wait(adapter, rtw_hal_update_txpwr_level_cfi, adapter, 2000);
+ 
+ exit:
+ 	return ret;
+--- a/drivers/rtl8188eus/hal/hal_hci/hal_usb.c
++++ b/drivers/rtl8188eus/hal/hal_hci/hal_usb.c
+@@ -17,6 +17,13 @@
+ #include <drv_types.h>
+ #include <hal_data.h>
+ 
++#ifdef PLATFORM_LINUX
++static void usb_recv_tasklet_cfi(unsigned long data)
++{
++	usb_recv_tasklet((void *)data);
++}
++#endif
++
+ int	usb_init_recv_priv(_adapter *padapter, u16 ini_in_buf_sz)
+ {
+ 	struct recv_priv	*precvpriv = &padapter->recvpriv;
+@@ -25,7 +32,7 @@
+ 
+ #ifdef PLATFORM_LINUX
+ 	tasklet_init(&precvpriv->recv_tasklet,
+-		     (void(*)(unsigned long))usb_recv_tasklet,
++		     usb_recv_tasklet_cfi,
+ 		     (unsigned long)padapter);
+ #endif /* PLATFORM_LINUX */
+ 
+--- a/drivers/rtl8812bu/hal/hal_hci/hal_usb.c
++++ b/drivers/rtl8812bu/hal/hal_hci/hal_usb.c
+@@ -17,6 +17,13 @@
+ #include <drv_types.h>
+ #include <hal_data.h>
+ 
++#ifdef PLATFORM_LINUX
++static void usb_recv_tasklet_cfi(unsigned long data)
++{
++	usb_recv_tasklet((void *)data);
++}
++#endif
++
+ int	usb_init_recv_priv(_adapter *padapter, u16 ini_in_buf_sz)
+ {
+ 	struct registry_priv *regsty = adapter_to_regsty(padapter);
+@@ -27,9 +34,9 @@
+ #ifdef PLATFORM_LINUX
+ 	tasklet_init(&precvpriv->recv_tasklet,
+ #if (LINUX_VERSION_CODE < KERNEL_VERSION(5, 17, 0) && !defined(RHEL92))
+-		     (void(*)(unsigned long))usb_recv_tasklet,
++		     usb_recv_tasklet_cfi,
+ #else
+-		     (void *)usb_recv_tasklet,
++		     usb_recv_tasklet_cfi,
+ #endif
+ 		     (unsigned long)padapter);
+ #endif /* PLATFORM_LINUX */
+--- a/drivers/rtl8812au/os_dep/linux/rtw_proc.c
++++ b/drivers/rtl8812au/os_dep/linux/rtw_proc.c
+@@ -2172,6 +2172,17 @@
+ 	return 0;
+ }
+ 
++/* Queue callbacks take void *, while PHY helpers take _adapter *. */
++static void phy_reload_default_tx_power_ext_info_cfi(void *context)
++{
++	phy_reload_default_tx_power_ext_info((_adapter *)context);
++}
++
++static void phy_reload_tx_power_ext_info_cfi(void *context)
++{
++	phy_reload_tx_power_ext_info((_adapter *)context);
++}
++
+ static ssize_t proc_set_tx_power_ext_info(struct file *file, const char __user *buffer, size_t count, loff_t *pos, void *data)
+ {
+ 	struct net_device *dev = data;
+@@ -2201,9 +2212,9 @@
+ 			goto clear_ps_deny;
+ 
+ 		if (strcmp("default", cmd) == 0)
+-			rtw_run_in_thread_cmd(adapter, ((void *)(phy_reload_default_tx_power_ext_info)), adapter);
++			rtw_run_in_thread_cmd(adapter, phy_reload_default_tx_power_ext_info_cfi, adapter);
+ 		else
+-			rtw_run_in_thread_cmd(adapter, ((void *)(phy_reload_tx_power_ext_info)), adapter);
++			rtw_run_in_thread_cmd(adapter, phy_reload_tx_power_ext_info_cfi, adapter);
+ 
+ clear_ps_deny:
+ 		rtw_ps_deny_cancel(adapter, PS_DENY_IOCTL);
+--- a/drivers/rtl8188eus/os_dep/linux/rtw_proc.c
++++ b/drivers/rtl8188eus/os_dep/linux/rtw_proc.c
+@@ -2060,6 +2060,17 @@
+ 	return 0;
+ }
+ 
++/* Queue callbacks take void *, while PHY helpers take _adapter *. */
++static void phy_reload_default_tx_power_ext_info_cfi(void *context)
++{
++	phy_reload_default_tx_power_ext_info((_adapter *)context);
++}
++
++static void phy_reload_tx_power_ext_info_cfi(void *context)
++{
++	phy_reload_tx_power_ext_info((_adapter *)context);
++}
++
+ static ssize_t proc_set_tx_power_ext_info(struct file *file, const char __user *buffer, size_t count, loff_t *pos, void *data)
+ {
+ 	struct net_device *dev = data;
+@@ -2089,9 +2100,9 @@
+ 			goto clear_ps_deny;
+ 
+ 		if (strcmp("default", cmd) == 0)
+-			rtw_run_in_thread_cmd(adapter, ((void *)(phy_reload_default_tx_power_ext_info)), adapter);
++			rtw_run_in_thread_cmd(adapter, phy_reload_default_tx_power_ext_info_cfi, adapter);
+ 		else
+-			rtw_run_in_thread_cmd(adapter, ((void *)(phy_reload_tx_power_ext_info)), adapter);
++			rtw_run_in_thread_cmd(adapter, phy_reload_tx_power_ext_info_cfi, adapter);
+ 
+ clear_ps_deny:
+ 		rtw_ps_deny_cancel(adapter, PS_DENY_IOCTL);
+--- a/drivers/rtl8812bu/os_dep/linux/rtw_proc.c
++++ b/drivers/rtl8812bu/os_dep/linux/rtw_proc.c
+@@ -2877,6 +2877,17 @@
+ 	return 0;
+ }
+ 
++/* Queue callbacks take void *, while PHY helpers take _adapter *. */
++static void phy_reload_default_tx_power_ext_info_cfi(void *context)
++{
++	phy_reload_default_tx_power_ext_info((_adapter *)context);
++}
++
++static void phy_reload_tx_power_ext_info_cfi(void *context)
++{
++	phy_reload_tx_power_ext_info((_adapter *)context);
++}
++
+ static ssize_t proc_set_tx_power_ext_info(struct file *file, const char __user *buffer, size_t count, loff_t *pos, void *data)
+ {
+ 	struct net_device *dev = data;
+@@ -2906,9 +2917,9 @@
+ 			goto clear_ps_deny;
+ 
+ 		if (strcmp("default", cmd) == 0)
+-			rtw_run_in_thread_cmd(adapter, ((void *)(phy_reload_default_tx_power_ext_info)), adapter);
++			rtw_run_in_thread_cmd(adapter, phy_reload_default_tx_power_ext_info_cfi, adapter);
+ 		else
+-			rtw_run_in_thread_cmd(adapter, ((void *)(phy_reload_tx_power_ext_info)), adapter);
++			rtw_run_in_thread_cmd(adapter, phy_reload_tx_power_ext_info_cfi, adapter);
+ 
+ 		rtw_run_in_thread_cmd_wait(adapter, ((void *)(rtw_hal_update_txpwr_level)), adapter, 2000);
+ 

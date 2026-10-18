@@ -1,0 +1,22 @@
+# Local build and release staging
+out/
+dist/
+release-assets/
+*.img
+*.apk
+*.log
+*.tmp
+
+# Device data must never enter this repository
+backups/
+diagnostics/
+*.pcap
+*.pcapng
+*.key
+*.pem
+
+# Python and editor files
+__pycache__/
+*.pyc
+.idea/
+.vscode/

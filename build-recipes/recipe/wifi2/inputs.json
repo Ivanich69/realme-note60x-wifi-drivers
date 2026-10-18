@@ -1,0 +1,50 @@
+{
+  "variant": "wifi2-full-lto",
+  "scope": "Host-only source preparation",
+  "source_bundle": "artifacts/realme-note60x/gki-wifi1/sources/driver-sources-and-config.tar.gz",
+  "source_bundle_sha256": "ea6becd11081d7158bd38814c60c5ff769e8be2532f1c237d15f4c9ca3211bcf",
+  "config_seed_sha256": "513cad42f78dee45b7892917cc7c080971734d990b866243fabeece1c22bcb8b",
+  "baseline_config_sha256": "964a06b43b5906aae9386657263b773472d17cb22b7b492f13eba1acc13eb9ca",
+  "kernel_config_changes": [
+    "LTO_CLANG_FULL=n -> y",
+    "LTO_CLANG_THIN=y -> n"
+  ],
+  "source_changes": [
+    {
+      "file": "drivers/rtl8812au/core/rtw_xmit.c",
+      "before_sha256": "d542b2e59ba645b14f5baaa4458acb7cbbb9bb5f6207fa6c23d615b92ea2e072",
+      "after_sha256": "ef40a7133e347365e60668a484c74245c3890bc795f16fdc852f180ae231d282"
+    },
+    {
+      "file": "drivers/rtl8188eus/core/rtw_xmit.c",
+      "before_sha256": "d07ba06f15f1762aedecabce45ca47c6365725c8658330c20e6c2c80717159a0",
+      "after_sha256": "fe6054ea1fb59df0f5c794acc5ada02fcf65f140b9fbb5a0668b55d8254f3aaf"
+    },
+    {
+      "file": "drivers/rtl8188eus/os_dep/linux/xmit_linux.c",
+      "before_sha256": "9d391cc2f12a3389d64b1efc73790c5464ecb2ab791ce15046ac584b4a280e05",
+      "after_sha256": "b3b56bf6d6f41119a537e6a6b981ce673cc537a000fbad786ecb6a711bd750e3"
+    },
+    {
+      "file": "drivers/rtl8188eus/include/xmit_osdep.h",
+      "before_sha256": "7d47afeb04ca2c0d86f0ed72c98f04c91e22ccaad0360316764e840d843625f1",
+      "after_sha256": "a990f4b3b5f58e6f542d65ed8c00cd015a561f93e7112203d92e008eb10ef9f5"
+    },
+    {
+      "file": "drivers/rtl8812bu/os_dep/linux/xmit_linux.c",
+      "before_sha256": "24d57cdc55e23a9ac28837433596448ad88b552ba754955825b102ae4faa76a6",
+      "after_sha256": "5c4e88e15b1f9a06e17e610a0ed556e9b573d56a26e6a3cf641e92f3d9dc84ed"
+    },
+    {
+      "file": "drivers/rtl8812bu/include/xmit_osdep.h",
+      "before_sha256": "d1d749534d431855c0d50abb1210cf2a7318b3fe3fe6accd6633c3442715f8a8",
+      "after_sha256": "5a420e02e79c19dcead8b2303f62afa28f820ebd2bc6fb514a511ed9288e72cd"
+    }
+  ],
+  "compiled": false,
+  "hardware_tested": false,
+  "additional_CFI_fix": "Linux RTL8188EUS/RTL8812BU ndo_start_xmit returns netdev_tx_t",
+  "existing_artifacts_modified": false,
+  "WSL_started": false,
+  "patch_sha256": "d0f52ead12dd7f1c31d6db5a19caf3eef6a1cb0fa1b73ce2effec45d8a3e0ce6"
+}

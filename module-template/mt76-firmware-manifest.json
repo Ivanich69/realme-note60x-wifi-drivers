@@ -1,0 +1,30 @@
+{
+  "repository": "https://kernel.googlesource.com/pub/scm/linux/kernel/git/firmware/linux-firmware",
+  "commit": "24247053afda2bab6b4ace42402dbf9f3b1305d6",
+  "files": [
+    {
+      "file": "mediatek/mt7662u.bin",
+      "size": 91412,
+      "sha256": "527dc38380b698330a6f5300bfd70278c45c0b6c60596e6ef6ac9828a84628fb",
+      "url": "https://kernel.googlesource.com/pub/scm/linux/kernel/git/firmware/linux-firmware/+/24247053afda2bab6b4ace42402dbf9f3b1305d6/mediatek/mt7662u.bin?format=TEXT"
+    },
+    {
+      "file": "mediatek/mt7662u_rom_patch.bin",
+      "size": 20686,
+      "sha256": "3c358bb8feebfa124e809891a9d8efc27c69efa8a3169f3061f625f6b25d2870",
+      "url": "https://kernel.googlesource.com/pub/scm/linux/kernel/git/firmware/linux-firmware/+/24247053afda2bab6b4ace42402dbf9f3b1305d6/mediatek/mt7662u_rom_patch.bin?format=TEXT"
+    },
+    {
+      "file": "LICENSES/LICENCE.mediatek",
+      "size": 561,
+      "sha256": "a90d3f66704d85889945fec5525ea77622549da83aced1aac99828383f8f1805",
+      "url": "https://kernel.googlesource.com/pub/scm/linux/kernel/git/firmware/linux-firmware/+/24247053afda2bab6b4ace42402dbf9f3b1305d6/LICENSES/LICENCE.mediatek?format=TEXT"
+    },
+    {
+      "file": "WHENCE",
+      "size": 509226,
+      "sha256": "a8a9d56433b6a0b859449188858f6a62d1e8c199688f7be6055817faebce6846",
+      "url": "https://kernel.googlesource.com/pub/scm/linux/kernel/git/firmware/linux-firmware/+/24247053afda2bab6b4ace42402dbf9f3b1305d6/WHENCE?format=TEXT"
+    }
+  ]
+}

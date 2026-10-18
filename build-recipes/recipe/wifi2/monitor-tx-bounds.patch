@@ -1,0 +1,108 @@
+--- a/drivers/rtl8812au/core/rtw_xmit.c
++++ b/drivers/rtl8812au/core/rtw_xmit.c
+@@ -4433,10 +4433,11 @@
+ 	if (unlikely(rtap_hdr->it_version))
+ 		goto fail;
+ 
+-	if (unlikely(skb->len < rtap_len))
+-		goto fail;
+-
+-	if (unlikely(rtap_len < sizeof(struct ieee80211_radiotap_header)))
++	/* Bound both copy destinations before consuming packet bytes. */
++	if (unlikely(rtap_len < sizeof(*rtap_hdr) ||
++		rtap_len > sizeof(rtap_buf) || rtap_len > skb->len ||
++		skb->len - rtap_len < WLAN_HDR_A3_LEN ||
++		skb->len - rtap_len > MAX_XMIT_EXTBUF_SZ - TXDESC_OFFSET))
+ 		goto fail;
+ 
+ 	len -= sizeof(struct ieee80211_radiotap_header);
+--- a/drivers/rtl8188eus/core/rtw_xmit.c
++++ b/drivers/rtl8188eus/core/rtw_xmit.c
+@@ -4347,15 +4347,14 @@
+ 	u16 frame_ctl;
+ 	struct ieee80211_radiotap_header rtap_hdr;
+ 	_adapter *padapter = (_adapter *)rtw_netdev_priv(ndev);
+-	struct pkt_file pktfile;
++	struct pkt_file pktfile = {0};
+ 	struct rtw_ieee80211_hdr *pwlanhdr;
+ 	struct pkt_attrib	*pattrib;
+ 	struct xmit_frame		*pmgntframe;
+ 	struct mlme_ext_priv	*pmlmeext = &(padapter->mlmeextpriv);
+ 	struct xmit_priv	*pxmitpriv = &(padapter->xmitpriv);
+ 	unsigned char	*pframe;
+-	u8 dummybuf[32];
+-	int len = skb->len, rtap_len, consume;
++	int len = skb->len, rtap_len;
+ 
+ 	if (skb)
+ 		rtw_mstat_update(MSTAT_TYPE_SKB, MSTAT_ALLOC_SUCCESS, skb->truesize);
+@@ -4369,18 +4368,15 @@
+ 	if (unlikely(rtap_hdr.it_version))
+ 		goto fail;
+ 
+-	if (unlikely(skb->len < rtap_len))
++	/* Check lengths before subtracting or copying the frame. */
++	if (unlikely(rtap_len < sizeof(rtap_hdr) || rtap_len > skb->len ||
++		skb->len - rtap_len < WLAN_HDR_A3_LEN ||
++		skb->len - rtap_len > MAX_XMIT_EXTBUF_SZ - TXDESC_OFFSET))
+ 		goto fail;
+ 
+-	len -= sizeof(struct ieee80211_radiotap_header);
+-	rtap_len -= sizeof(struct ieee80211_radiotap_header);
+-
+-	while(rtap_len) {
+-		consume = rtap_len > sizeof(dummybuf) ? sizeof(dummybuf) : rtap_len;
+-		_rtw_pktfile_read(&pktfile, dummybuf, consume);
+-		rtap_len -= consume;
+-		len -= consume;
+-	}
++	/* Skip radiotap bytes without a temporary copy or signed loop. */
++	_rtw_pktfile_read(&pktfile, NULL, rtap_len - sizeof(rtap_hdr));
++	len -= rtap_len;
+ 
+ 	pmgntframe = alloc_mgtxmitframe(pxmitpriv);
+ 	if (pmgntframe == NULL) {
+--- a/drivers/rtl8188eus/os_dep/linux/xmit_linux.c
++++ b/drivers/rtl8188eus/os_dep/linux/xmit_linux.c
+@@ -513,7 +513,7 @@
+ 	return 0;
+ }
+ 
+-int rtw_xmit_entry(_pkt *pkt, _nic_hdl pnetdev)
++netdev_tx_t rtw_xmit_entry(_pkt *pkt, _nic_hdl pnetdev)
+ {
+ 	_adapter *padapter = (_adapter *)rtw_netdev_priv(pnetdev);
+ 	struct	mlme_priv	*pmlmepriv = &(padapter->mlmepriv);
+--- a/drivers/rtl8188eus/include/xmit_osdep.h
++++ b/drivers/rtl8188eus/include/xmit_osdep.h
+@@ -68,7 +68,7 @@
+ struct xmit_buf;
+ 
+ extern int _rtw_xmit_entry(_pkt *pkt, _nic_hdl pnetdev);
+-extern int rtw_xmit_entry(_pkt *pkt, _nic_hdl pnetdev);
++extern netdev_tx_t rtw_xmit_entry(_pkt *pkt, _nic_hdl pnetdev);
+ 
+ #endif /* PLATFORM_LINUX */
+ 
+--- a/drivers/rtl8812bu/os_dep/linux/xmit_linux.c
++++ b/drivers/rtl8812bu/os_dep/linux/xmit_linux.c
+@@ -514,7 +514,7 @@
+ }
+ #endif
+ 
+-int rtw_xmit_entry(_pkt *pkt, _nic_hdl pnetdev)
++netdev_tx_t rtw_xmit_entry(_pkt *pkt, _nic_hdl pnetdev)
+ {
+ 	_adapter *padapter = (_adapter *)rtw_netdev_priv(pnetdev);
+ 	struct	mlme_priv	*pmlmepriv = &(padapter->mlmepriv);
+--- a/drivers/rtl8812bu/include/xmit_osdep.h
++++ b/drivers/rtl8812bu/include/xmit_osdep.h
+@@ -68,7 +68,7 @@
+ struct xmit_buf;
+ 
+ extern int _rtw_xmit_entry(_pkt *pkt, _nic_hdl pnetdev);
+-extern int rtw_xmit_entry(_pkt *pkt, _nic_hdl pnetdev);
++extern netdev_tx_t rtw_xmit_entry(_pkt *pkt, _nic_hdl pnetdev);
+ 
+ #endif /* PLATFORM_LINUX */
+ 

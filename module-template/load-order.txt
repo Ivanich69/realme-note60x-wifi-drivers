@@ -1,0 +1,14 @@
+88XXau.ko
+8188eu.ko
+88x2bu.ko
+mac80211.ko
+ath.ko
+ath9k_hw.ko
+ath9k_common.ko
+ath9k_htc.ko
+mt76.ko
+mt76x02-lib.ko
+mt76x2-common.ko
+mt76-usb.ko
+mt76x02-usb.ko
+mt76x2u.ko

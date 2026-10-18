@@ -1,0 +1,33 @@
+{
+  "project": "realme-note60x-wifi4-cfi-runtime",
+  "target": {
+    "model": "RMX3938",
+    "build": "RMX3938export_15_C.13",
+    "android": 15
+  },
+  "kernel": {
+    "repository": "https://android.googlesource.com/kernel/common",
+    "commit": "0c6055fd2d8b95ec88db7bfd79bfd1e471592215",
+    "tag": "android13-5.15-2025-03_r2"
+  },
+  "drivers": {
+    "rtl8812au": {
+      "repository": "https://github.com/aircrack-ng/rtl8812au.git",
+      "commit": "734485506a30d6237c2deaad666a19f8ca5379f2"
+    },
+    "rtl8188eus": {
+      "repository": "https://github.com/aircrack-ng/rtl8188eus.git",
+      "commit": "af3bf004458f76b7aec33e9ba552cd382ed1f5c3"
+    },
+    "rtl8812bu": {
+      "repository": "https://github.com/morrownr/88x2bu-20210702.git",
+      "commit": "d31ffa827bb95b8a436c2a469b5163b634ac4333"
+    }
+  },
+  "toolchain": {
+    "repository": "https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86",
+    "commit": "9f759dee5cdc5f85d076c642a192f6a9232f7058",
+    "directory": "clang-r450784e"
+  },
+  "binary_package_sha256": "610c83d49709af3890951995c9b016c2c1f050a14f81c44a0d0cefcf6debf2f5"
+}

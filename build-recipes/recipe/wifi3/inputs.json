@@ -1,0 +1,27 @@
+{
+  "variant": "wifi3-cfi-monitor",
+  "scope": "Host-only module rebuild; wifi2 core retained",
+  "source_bundle": "artifacts/realme-note60x/gki-wifi2-full-lto/sources/driver-sources-and-config.tar.gz",
+  "source_bundle_sha256": "e81483954820aa2907c1cd29ed3f79de1b54b0f71c16de167fc3eeacd6c15c5e",
+  "base_Image_sha256": "c7a1a7e7a6d9784d00e7d8f0c18f5ee072b5f006e8696162d2405ac515d305db",
+  "config_sha256": "513cad42f78dee45b7892917cc7c080971734d990b866243fabeece1c22bcb8b",
+  "source_changes": [
+    {
+      "file": "drivers/rtl8812au/os_dep/linux/ioctl_cfg80211.c",
+      "before_sha256": "89788c369d9e59c7dd66b0e3a13939a6df30a38e2f9f2286f0ae174df88bc6e2",
+      "after_sha256": "d6b101dce2ba447882a8fcfa55e12f612c14172f23ae4f0a199830838775e116"
+    },
+    {
+      "file": "drivers/rtl8188eus/os_dep/linux/ioctl_cfg80211.c",
+      "before_sha256": "1f1a60be2e94df4b7835204d64071660015ce6e15472e9e5ee11696de48b0726",
+      "after_sha256": "fe54cf8965d1bcc29fd054359c6b87d83b71a4c74d69ca398b5383cee3fc8453"
+    },
+    {
+      "file": "drivers/rtl8812bu/os_dep/linux/ioctl_cfg80211.c",
+      "before_sha256": "dd79d25ea225e434dbeab65d3ba65fd49b1b2611ffe384961c173d0b2230c7bd",
+      "after_sha256": "c8d524a6681a8678c64793aaee82e2d01a6c759dcbb224d349ad5d0c28c57784"
+    }
+  ],
+  "patch_sha256": "3cea6e982c76493aa162c3ad78f7cbdb246b45c90152c294e49c209e012127cd",
+  "device_operations": []
+}

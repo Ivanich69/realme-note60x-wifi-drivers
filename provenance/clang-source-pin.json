@@ -1,0 +1,8 @@
+{
+  "repository": "https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86",
+  "branch": "master-kernel-build-2022",
+  "commit": "9f759dee5cdc5f85d076c642a192f6a9232f7058",
+  "tree": "c081b5c0d2a6feff99f06be1344647d5352aeba8",
+  "directory": "clang-r450784e",
+  "directory_tree": "0fa3cd27f61cc798aa9553b856ec89b36316efb6"
+}

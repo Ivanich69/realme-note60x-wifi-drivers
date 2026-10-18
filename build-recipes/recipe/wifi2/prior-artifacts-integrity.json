@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "wifi1_manifest_entries": 63,
+  "wifi1_reviewed_files": [
+    "boot.img",
+    "realme-note60x-wifi1-magisk.zip",
+    "boot_b-original-C13.img",
+    "review.json",
+    "README.md"
+  ],
+  "phone_contacted": false
+}

@@ -1,0 +1,6 @@
+id=realme_wifi_gki1
+name=Realme Note 60x USB Wi-Fi wifi4
+version=wifi4
+versionCode=4
+author=wifi_work
+description=USB Wi-Fi drivers and firmware for RMX3938 C.13 wifi4; hardware untested

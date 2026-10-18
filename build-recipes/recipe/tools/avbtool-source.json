@@ -1,0 +1,8 @@
+{
+  "source_url": "https://android.googlesource.com/platform/external/avb/+/refs/heads/main/avbtool.py?format=TEXT",
+  "git_blob_sha1": "595936c88d24b6e571b303a23a0e7cfe2e185bc7",
+  "sha256": "e5a664a38db623da00f080219bc0ee60a640a9dc4a872803616fae4938ac749b",
+  "bytes": 207502,
+  "license": "MIT, retained in source",
+  "download_only": true
+}
