@@ -29,5 +29,12 @@
     "commit": "9f759dee5cdc5f85d076c642a192f6a9232f7058",
     "directory": "clang-r450784e"
   },
-  "binary_package_sha256": "610c83d49709af3890951995c9b016c2c1f050a14f81c44a0d0cefcf6debf2f5"
+  "release": {
+    "kernel_image_sha256": "c7a1a7e7a6d9784d00e7d8f0c18f5ee072b5f006e8696162d2405ac515d305db",
+    "binary_package_sha256": "610c83d49709af3890951995c9b016c2c1f050a14f81c44a0d0cefcf6debf2f5",
+    "expected_stock_boot_sha256": "4432fa1827b9f4cb12816d646d6b4be08b10d65537bda9f5d2c10b554a53bf4f",
+    "repacked_boot_sha256": "7c67c4b876c7710b2248dca9f7bbe9942087c44365baf7be1cc39cdd83c700a7",
+    "repacked_boot_bytes": 67108864,
+    "repacked_boot_avb_algorithm": "NONE"
+  }
 }

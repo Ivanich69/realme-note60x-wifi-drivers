@@ -1,0 +1,63 @@
+name: Отчёт о Wi-Fi адаптере
+description: Совместимость конкретной модели или аппаратной ревизии
+title: "[Adapter]: "
+labels:
+  - compatibility
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Не публикуйте IMEI, серийные номера, MAC-адреса, пароли, приватные ключи и дампы разделов.
+  - type: input
+    id: release
+    attributes:
+      label: Выпуск проекта
+      placeholder: wifi4-v1.0.0
+    validations:
+      required: true
+  - type: input
+    id: adapter
+    attributes:
+      label: Адаптер и ревизия
+      placeholder: Производитель, модель, hardware version
+    validations:
+      required: true
+  - type: input
+    id: usb-id
+    attributes:
+      label: USB VID:PID
+      placeholder: "0bda:8812"
+    validations:
+      required: true
+  - type: dropdown
+    id: chipset
+    attributes:
+      label: Семейство чипсета
+      options:
+        - RTL8812AU / RTL8814AU
+        - RTL8188EUS
+        - RTL8812BU / RTL8822BU
+        - AR9271
+        - MT7612U
+        - Другое / неизвестно
+    validations:
+      required: true
+  - type: checkboxes
+    id: results
+    attributes:
+      label: Результаты
+      options:
+        - label: Интерфейс появился
+        - label: Обычное сканирование работает
+        - label: Monitor mode работает
+        - label: Frame injection проверена на разрешённой тестовой сети
+  - type: textarea
+    id: power
+    attributes:
+      label: OTG и питание
+      description: Тип переходника, внешний USB hub, дополнительное питание
+  - type: textarea
+    id: notes
+    attributes:
+      label: Дополнительные сведения
+      description: Симптомы и обезличенные фрагменты журнала

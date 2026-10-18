@@ -1,13 +1,21 @@
-# Security policy
+# Политика безопасности
 
-This project contains dual-use wireless driver functionality intended for
-authorized testing and driver development.
+Проект содержит функции беспроводных драйверов двойного назначения и
+предназначен для разработки, диагностики собственного оборудования и
+авторизованного тестирования.
 
-Please report build-integrity problems, unsafe module-loading behavior,
-unexpected partition access, exposed private data or licensing issues through
-a GitHub issue. Do not include device serial numbers, MAC addresses, private
-network captures, credentials or partition dumps in public reports.
+Через GitHub Issue можно сообщить о следующих проблемах:
 
-The project does not accept requests to target third-party networks or bypass
-authorization.
+- нарушении целостности сборки или несоответствии опубликованных хешей;
+- небезопасном поведении сценария загрузки модулей;
+- неожиданном доступе build/repack инструментов к устройству или разделам;
+- случайно опубликованных приватных данных;
+- проблемах с лицензированием или соответствующими исходниками.
+
+Не добавляйте в публичный отчёт серийные номера устройств, IMEI, MAC-адреса,
+учётные данные, приватные capture-файлы, ключи и дампы разделов. Чувствительные
+детали сначала опишите без самих данных и дождитесь безопасного канала связи.
+
+Проект не принимает запросы на атаки сторонних сетей, обход разрешения
+владельца или сокрытие несанкционированной активности.
 

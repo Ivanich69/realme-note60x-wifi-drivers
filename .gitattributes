@@ -10,9 +10,11 @@ Kconfig text eol=lf
 *.config text eol=lf
 *.patch text eol=lf
 *.json text eol=lf
+*.yml text eol=lf
 *.md text eol=lf
 *.txt text eol=lf
 *.prop text eol=lf
+Module.symvers text eol=lf
 
 *.fw binary
 *.bin binary
