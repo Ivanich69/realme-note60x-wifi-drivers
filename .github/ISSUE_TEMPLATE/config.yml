@@ -1,5 +1,8 @@
 blank_issues_enabled: true
 contact_links:
-  - name: Полное руководство
+  - name: Detailed English guide
+    url: https://github.com/Ivanich69/realme-note60x-wifi-drivers/blob/main/docs/EN.md
+    about: Compatibility, release files, verification and limitations
+  - name: Подробное руководство на русском
     url: https://github.com/Ivanich69/realme-note60x-wifi-drivers/blob/main/docs/RU.md
     about: Совместимость, файлы релиза, проверка и ограничения

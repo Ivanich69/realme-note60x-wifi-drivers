@@ -1,5 +1,7 @@
 # wifi4-v1.0.0
 
+[English](RELEASE_NOTES_wifi4-v1.0.0_EN.md) | **Русский**
+
 Первый публичный выпуск USB Wi-Fi стека для Realme Note 60x `RMX3938` на
 `RMX3938export_15_C.13`.
 

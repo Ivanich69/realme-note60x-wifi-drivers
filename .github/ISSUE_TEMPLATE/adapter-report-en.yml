@@ -1,0 +1,63 @@
+name: Wi-Fi adapter report
+description: Report compatibility for a specific adapter or hardware revision
+title: "[Adapter]: "
+labels:
+  - compatibility
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Do not publish IMEI values, device serial numbers, MAC addresses, passwords, private keys or partition dumps.
+  - type: input
+    id: release
+    attributes:
+      label: Project release
+      placeholder: wifi4-v1.0.0
+    validations:
+      required: true
+  - type: input
+    id: adapter
+    attributes:
+      label: Adapter and hardware revision
+      placeholder: Manufacturer, model and hardware version
+    validations:
+      required: true
+  - type: input
+    id: usb-id
+    attributes:
+      label: USB VID:PID
+      placeholder: "0bda:8812"
+    validations:
+      required: true
+  - type: dropdown
+    id: chipset
+    attributes:
+      label: Chipset family
+      options:
+        - RTL8812AU / RTL8814AU
+        - RTL8188EUS
+        - RTL8812BU / RTL8822BU
+        - AR9271
+        - MT7612U
+        - Other / unknown
+    validations:
+      required: true
+  - type: checkboxes
+    id: results
+    attributes:
+      label: Results
+      options:
+        - label: A network interface appeared
+        - label: Ordinary scanning works
+        - label: Monitor mode works
+        - label: Frame injection was tested on an authorized network
+  - type: textarea
+    id: power
+    attributes:
+      label: OTG and power setup
+      description: Adapter cable, powered hub and external power details
+  - type: textarea
+    id: notes
+    attributes:
+      label: Additional details
+      description: Symptoms and sanitized log excerpts
